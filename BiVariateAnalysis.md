@@ -10,6 +10,7 @@
 [Bi-Variate Statistics - Comparing Factor Variables to BS.NEFA.1.2](#bi-variate-statistics---comparing-hapto-035-to-factor-variables) 
 
 [Results](#results) 
+
 --------
 ## Bi-Variate Statistics - Comparing Numeric Variables to BS.NEFA
 
