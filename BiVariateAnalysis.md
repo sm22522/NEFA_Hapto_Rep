@@ -49,7 +49,7 @@ summary(Hapto_Hapto.Log)
 We find that, at a significance level of 0.05, this association is: Statistically Significant
 
 Scatterplot:
-  <img src="https://user-images.githubusercontent.com/52465712/60815985-fcce7300-a198-11e9-8a96-8bcd867b35bc.png" width="300">
+  <img src="https://user-images.githubusercontent.com/52465712/68156858-2e223a00-ff12-11e9-89a2-cf1c4469b801.png" width="300">
   
 
   #### BS.NEFA.Log ~ BS.BHBA.Log - Testing how the cow's blood BHBA levels affected the cow's NEFA levels
@@ -72,7 +72,7 @@ summary(Hapto_BS.BHBA.Log)
 We find that, at a significance level of 0.05, this association is: Statistically Significant
 
 Scatterplot:
-  <img src="https://user-images.githubusercontent.com/52465712/60815985-fcce7300-a198-11e9-8a96-8bcd867b35bc.png" width="300">
+  <img src="https://user-images.githubusercontent.com/52465712/68156859-2e223a00-ff12-11e9-8697-415baa10845c.png" width="300">
   
   
   #### BS.NEFA.Log ~ BS.DIM - Testing how the DIM affected the cow's NEFA levels
@@ -95,7 +95,7 @@ summary(Hapto_BS.DIM)
 We find that, at a significance level of 0.05, this association is: Statistically Significant
 
 Scatterplot:
-  <img src="https://user-images.githubusercontent.com/52465712/60815985-fcce7300-a198-11e9-8a96-8bcd867b35bc.png" width="300">
+  <img src="https://user-images.githubusercontent.com/52465712/68156861-2e223a00-ff12-11e9-9cf6-dcaccad948d2.png" width="300">
   
   
   #### BS.NEFA.Log ~ BS.MS.Date.Difference - Testing how the difference in testing days affected the cow's NEFA levels
@@ -118,7 +118,7 @@ summary(Hapto_BS.MS.Date.Difference)
 We find that, at a significance level of 0.05, this association is: Statistically Significant
 
 Scatterplot:
-  <img src="https://user-images.githubusercontent.com/52465712/60815985-fcce7300-a198-11e9-8a96-8bcd867b35bc.png" width="300">
+  <img src="https://user-images.githubusercontent.com/52465712/68156862-2e223a00-ff12-11e9-9aeb-0bb851466817.png" width="300">
   
   
   #### BS.NEFA.Log ~ Calving.No - Testing how the number of calves affected the cow's NEFA levels
@@ -141,7 +141,7 @@ summary(Hapto_Calving.No)
 We find that, at a significance level of 0.05, this association is: Not Statistically Significant
 
 Scatterplot:
-  <img src="https://user-images.githubusercontent.com/52465712/60815985-fcce7300-a198-11e9-8a96-8bcd867b35bc.png" width="300">
+  <img src="https://user-images.githubusercontent.com/52465712/68156863-2e223a00-ff12-11e9-872f-a0b46361e1e4.png" width="300">
   
   
   #### BS.NEFA.Log ~ Milk.Yield - Testing how the milk yield affects the cow's NEFA levels
@@ -165,7 +165,7 @@ summary(Hapto_Milk.Yield)
 We find that, at a significance level of 0.05, this association is: Statistically Significant
 
 Scatterplot:
-  <img src="https://user-images.githubusercontent.com/52465712/60815985-fcce7300-a198-11e9-8a96-8bcd867b35bc.png" width="300">
+  <img src="https://user-images.githubusercontent.com/52465712/68156864-2e223a00-ff12-11e9-8116-e616b10c7c36.png" width="300">
   
   
   #### BS.NEFA.Log ~ MS.Milk.Yield - Testing how the amount of milk in the milk sample affects the cow's NEFA levels
@@ -188,7 +188,7 @@ summary(Hapto_MS.Milk.Yield)
 We find that, at a significance level of 0.05, this association is: Not Statistically Significant
 
 Scatterplot:
-  <img src="https://user-images.githubusercontent.com/52465712/60815985-fcce7300-a198-11e9-8a96-8bcd867b35bc.png" width="300">
+  <img src="https://user-images.githubusercontent.com/52465712/68156845-2d89a380-ff12-11e9-8925-871e3cdd42da.png" width="300">
   
   
   #### BS.NEFA.Log ~ MS.NEFA - Testing how the NEFA level in the milk sample affects the cow's NEFA levels
@@ -212,7 +212,7 @@ summary(Hapto_MS.NEFA)
 We find that, at a significance level of 0.05, this association is: Statistically Significant
 
 Scatterplot:
-  <img src="https://user-images.githubusercontent.com/52465712/60815985-fcce7300-a198-11e9-8a96-8bcd867b35bc.png" width="300">
+  <img src="https://user-images.githubusercontent.com/52465712/68156846-2d89a380-ff12-11e9-9565-a4d6f8975268.png" width="300">
   
   
   #### BS.NEFA.Log ~ MS.BHBA.Log - Testing how the BHBA level in the milk sample affects the cow's NEFA levels
@@ -236,7 +236,7 @@ summary(Hapto_MS.BHBA.Log)
 We find that, at a significance level of 0.05, this association is: Statistically Significant
 
 Scatterplot:
-  <img src="https://user-images.githubusercontent.com/52465712/60815985-fcce7300-a198-11e9-8a96-8bcd867b35bc.png" width="300">
+  <img src="https://user-images.githubusercontent.com/52465712/68156847-2d89a380-ff12-11e9-96bd-854a87fab4f7.png" width="300">
   
   
   #### BS.NEFA.Log ~ MS.DIM - Testing how the DIM from the milk sample affects the cow's NEFA levels
@@ -259,7 +259,7 @@ summary(Hapto_MS.DIM)
 We find that, at a significance level of 0.05, this association is: Statistically Significant
 
 Scatterplot:
-  <img src="https://user-images.githubusercontent.com/52465712/60815985-fcce7300-a198-11e9-8a96-8bcd867b35bc.png" width="300">
+  <img src="https://user-images.githubusercontent.com/52465712/68156849-2d89a380-ff12-11e9-839a-b628cb10514a.png" width="300">
  
   
   #### BS.NEFA.Log ~ MS.Fat - Testing how the fat level from the milk sample affects the cow's NEFA levels
@@ -282,7 +282,7 @@ summary(Hapto_MS.Fat)
 We find that, at a significance level of 0.05, this association is: Statistically Significant
 
 Scatterplot:
-  <img src="https://user-images.githubusercontent.com/52465712/60815985-fcce7300-a198-11e9-8a96-8bcd867b35bc.png" width="300">
+  <img src="https://user-images.githubusercontent.com/52465712/68156850-2d89a380-ff12-11e9-90e7-e6b972974a90.png" width="300">
   
   
   #### BS.NEFA.Log ~ MS.Protein - Testing how the protein level from the milk sample affects the cow's NEFA levels
@@ -305,7 +305,7 @@ summary(Hapto_MS.Protein)
 We find that, at a significance level of 0.05, this association is: Statistically Significant
 
 Scatterplot:
-  <img src="https://user-images.githubusercontent.com/52465712/60815985-fcce7300-a198-11e9-8a96-8bcd867b35bc.png" width="300">
+  <img src="https://user-images.githubusercontent.com/52465712/68156853-2d89a380-ff12-11e9-9a3f-da204a7b2c17.png" width="300">
   
   
   #### BS.NEFA.Log ~ MS.Lactose - Testing how the lactose level from the milk sample affects the cow's NEFA levels
@@ -326,7 +326,7 @@ summary(Hapto_MS.Lactose)
 We find that, at a significance level of 0.05, this association is: Not Statistically Significant
 
 Scatterplot:
-  <img src="https://user-images.githubusercontent.com/52465712/60815985-fcce7300-a198-11e9-8a96-8bcd867b35bc.png" width="300">
+  <img src="https://user-images.githubusercontent.com/52465712/68156855-2d89a380-ff12-11e9-8b18-9653e71b1e44.png" width="300">
   
   
   #### BS.NEFA.Log ~ MS.Acetone.Log - Testing how the acetone level from the milk sample affects the cow's NEFA levels
@@ -350,7 +350,7 @@ summary(Hapto_MS.Acetone.Log)
 We find that, at a significance level of 0.05, this association is: Statistically Significant
 
 Scatterplot:
-  <img src="https://user-images.githubusercontent.com/52465712/60815985-fcce7300-a198-11e9-8a96-8bcd867b35bc.png" width="300">
+  <img src="https://user-images.githubusercontent.com/52465712/68156856-2e223a00-ff12-11e9-84f6-212aa650fcd2.png" width="300">
  
   
   #### BS.NEFA.Log ~ MS.Urea - Testing how the urea level from the milk sample affects the cow's NEFA levels
@@ -373,7 +373,7 @@ summary(Hapto_MS.Urea)
 We find that, at a significance level of 0.05, this association is: Not Statistically Significant
 
 Scatterplot:
-  <img src="https://user-images.githubusercontent.com/52465712/60815985-fcce7300-a198-11e9-8a96-8bcd867b35bc.png" width="300">
+  <img src="https://user-images.githubusercontent.com/52465712/68157238-e6e87900-ff12-11e9-871d-c6ce88814867.png" width="300">
   
   
   #### BS.NEFA.Log ~ MS.S.Cell.Count.Log - Testing how the SCC from the milk sample affects the cow's NEFA levels
@@ -396,7 +396,7 @@ summary(Hapto_MS.S.Cell.Count.Log)
 We find that, at a significance level of 0.05, this association is: Not Statistically Significant
 
 Scatterplot:
-  <img src="https://user-images.githubusercontent.com/52465712/60815985-fcce7300-a198-11e9-8a96-8bcd867b35bc.png" width="300">
+  <img src="https://user-images.githubusercontent.com/52465712/68157233-e64fe280-ff12-11e9-8405-48212ae273ee.png" width="300">
   
   
   #### BS.NEFA.Log ~ MS.pH - Testing how the pH of the milk sample affects the cow's NEFA levels
@@ -419,7 +419,7 @@ summary(Hapto_MS.pH)
 We find that, at a significance level of 0.05, this association is: Statistically Significant
 
 Scatterplot:
-  <img src="https://user-images.githubusercontent.com/52465712/60815985-fcce7300-a198-11e9-8a96-8bcd867b35bc.png" width="300">
+  <img src="https://user-images.githubusercontent.com/52465712/68157232-e64fe280-ff12-11e9-9c14-97d880ab49ce.png" width="300">
   
   
   #### BS.NEFA.Log ~ MS.SFA - Testing how the Short Fatty Acid content of the milk sample affects the cow's NEFA levels
@@ -443,7 +443,7 @@ summary(Hapto_MS.SFA)
 We find that, at a significance level of 0.05, this association is: Statistically Significant
 
 Scatterplot:
-  <img src="https://user-images.githubusercontent.com/52465712/60815985-fcce7300-a198-11e9-8a96-8bcd867b35bc.png" width="300">
+  <img src="https://user-images.githubusercontent.com/52465712/68157234-e6e87900-ff12-11e9-899c-f535c85758de.png" width="300">
   
   
   #### BS.NEFA.Log ~ MS.PFA - Testing how the Poly-Saturated Fatty Acid content of the milk sample affects the cow's NEFA levels
@@ -467,7 +467,7 @@ summary(Hapto_MS.PFA)
 We find that, at a significance level of 0.05, this association is: Statistically Significant
 
 Scatterplot:
-  <img src="https://user-images.githubusercontent.com/52465712/60815985-fcce7300-a198-11e9-8a96-8bcd867b35bc.png" width="300">
+  <img src="https://user-images.githubusercontent.com/52465712/68157241-e6e87900-ff12-11e9-82de-403dc1d84206.png" width="300">
   
   
   #### BS.NEFA.Log ~ MS.MFA - Testing how the Mono-Saturated Fatty Acid content of the milk sample affects the cow's NEFA levels
@@ -514,7 +514,7 @@ summary(Hapto_MS.NSFA)
 We find that, at a significance level of 0.05, this association is: Statistically Significant
 
 Scatterplot:
-  <img src="https://user-images.githubusercontent.com/52465712/60815985-fcce7300-a198-11e9-8a96-8bcd867b35bc.png" width="300">
+  <img src="https://user-images.githubusercontent.com/52465712/68157240-e6e87900-ff12-11e9-902d-68899fe2ab3a.png" width="300">
   
   
   #### BS.NEFA.Log ~ MS.Palmeic - Testing how the Palmeic Fatty Acid content of the milk sample affects the cow's NEFA levels
@@ -538,7 +538,7 @@ summary(Hapto_MS.Palmeic)
 We find that, at a significance level of 0.05, this association is: Barely Not Statistically Significant
 
 Scatterplot:
-  <img src="https://user-images.githubusercontent.com/52465712/60815985-fcce7300-a198-11e9-8a96-8bcd867b35bc.png" width="300">
+  <img src="https://user-images.githubusercontent.com/52465712/68157236-e6e87900-ff12-11e9-8b89-51289b65d706.png" width="300">
   
   
   #### BS.NEFA.Log ~ MS.Stearine - Testing how the Stearic Fatty Acid content of the milk sample affects the cow's NEFA levels
@@ -562,7 +562,7 @@ summary(Hapto_MS.Stearine)
 We find that, at a significance level of 0.05, this association is: Statistically Significant
 
 Scatterplot:
-  <img src="https://user-images.githubusercontent.com/52465712/60815985-fcce7300-a198-11e9-8a96-8bcd867b35bc.png" width="300">
+  <img src="https://user-images.githubusercontent.com/52465712/68157237-e6e87900-ff12-11e9-8d6f-36d8e7415543.png" width="300">
   
   
   #### BS.NEFA.Log ~ MS.Oleic - Testing how the Oleic Fatty Acid content of the milk sample affects the cow's NEFA levels
@@ -586,7 +586,7 @@ summary(Hapto_MS.Oleic)
 We find that, at a significance level of 0.05, this association is: Statistically Significant
 
 Scatterplot:
-  <img src="https://user-images.githubusercontent.com/52465712/60815985-fcce7300-a198-11e9-8a96-8bcd867b35bc.png" width="300">
+  <img src="https://user-images.githubusercontent.com/52465712/68157235-e6e87900-ff12-11e9-976c-b09f808b42d4.png" width="300">
   
   
   #### BS.NEFA.Log ~ CE.Fat.Level - Testing how the fat level of the back of the cow affects the cow's NEFA levels
