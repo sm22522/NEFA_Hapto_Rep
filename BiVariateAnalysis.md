@@ -491,7 +491,7 @@ summary(Hapto_MS.MFA)
 We find that, at a significance level of 0.05, this association is: Statistically Significant
 
 Scatterplot:
-  <img src="https://user-images.githubusercontent.com/52465712/60815985-fcce7300-a198-11e9-8a96-8bcd867b35bc.png" width="300">
+  <img src="https://user-images.githubusercontent.com/52465712/68157738-dedd0900-ff13-11e9-9f4a-7138af7d3163.png" width="300">
   
   
   #### BS.NEFA.Log ~ MS.NSFA - Testing how the Non-Saturated Fatty Acid content of the milk sample affects the cow's NEFA levels
@@ -610,7 +610,7 @@ summary(Hapto_CE.Fat.Level)
 We find that, at a significance level of 0.05, this association is: Statistically Significant
 
 Scatterplot:
-  <img src="https://user-images.githubusercontent.com/52465712/60815985-fcce7300-a198-11e9-8a96-8bcd867b35bc.png" width="300">
+  <img src="https://user-images.githubusercontent.com/52465712/68157737-dedd0900-ff13-11e9-9978-052eaa6eb4f0.png" width="300">
   
   
   #### BS.NEFA.Log ~ CE.Temp - Testing how the inner body temperature of the cow affects the cow's NEFA levels
@@ -634,7 +634,7 @@ summary(Hapto_CE.Temp)
 We find that, at a significance level of 0.05, this association is: Not Statistically Significant
 
 Scatterplot:
-  <img src="https://user-images.githubusercontent.com/52465712/60815985-fcce7300-a198-11e9-8a96-8bcd867b35bc.png" width="300">
+  <img src="https://user-images.githubusercontent.com/52465712/68157741-df759f80-ff13-11e9-8db4-8ed080f392bd.png" width="300">
   
   
   #### BS.NEFA.Log ~ CE.Environ.Temp - Testing how the environmental temperature affects the cow's NEFA levels
@@ -658,7 +658,7 @@ summary(Hapto_CE.Environ.Temp)
 We find that, at a significance level of 0.05, this association is: Statistically Significant
 
 Scatterplot:
-  <img src="https://user-images.githubusercontent.com/52465712/60815985-fcce7300-a198-11e9-8a96-8bcd867b35bc.png" width="300">
+  <img src="https://user-images.githubusercontent.com/52465712/68157740-df759f80-ff13-11e9-8b76-2c0e342513fa.png" width="300">
 
 
 
