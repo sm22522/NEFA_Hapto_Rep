@@ -1702,13 +1702,798 @@ exp(cbind(OR = coef(BS.NEFA.0.7_CE.Environ.Temp), confint(BS.NEFA.0.7_CE.Environ
 
 
 --------
-## Bi-Variate Statistics - Comparing Factor Variables to BS.NEFA.1.2
+## Bi-Variate Statistics - Comparing Factor Variables to BS.NEFA.0.7
+
+Now we will test the associations between BS.NEFA.0.7 and factor variables
+
+For running all our t-tests below:
+  H0: beta1 = 0 (no association/no slope between the two variables)
+Ha: beta1 notequal 0 (some association/slope between the two variables)
+a = 0.05
+
+Our p-value represents the probability of getting a beta1 that matches the one found in our study, purely by chance. 
+If this p-value is below 0.05, this is statistically significant and provides convincing evidence against H0.
+So we reject H0. There is an association/slope between the two variables
+If this p-value is above 0.05, this is not statistically significant and does not provide convincing evidence against H0.
+So we fail to reject H0. There is no convincing evidence that there is an association/slope between the two variables.
 
 
+#### Before we begin we need to relevel our Hapto.0.35 variables so all our two way tables are uniform
+```r
+hp2$BS.NEFA.0.7.2 <- relevel(hp2$BS.NEFA.0.7, ref = "1")
+```
+But we will still use our traditional NEFA.0.7 variable for our tests so our reference value is 0 (not high NEFA).
+
+Keep in mind we also releveled some factor variables so the reference level was the 'norm' and the variable analyzed was our 'abnorm' variables.
+
+
+
+
+#### BS.NEFA.0.7 ~ Cow.Breed - Cow breed compared to high or low NEFA levels (cutoff: 0.7)
+```r
+#Logistic Regression Test
+BS.NEFA.0.7_Cow.Breed <- glm(BS.NEFA.0.7 ~ Cow.Breed, data = hp2, family = binomial(link=logit))
+summary(BS.NEFA.0.7_Cow.Breed)
+
+#Coefficients:
+#Estimate Std. Error z value Pr(>|z|)    
+#(Intercept)  -0.9714     0.1072  -9.063  < 2e-16 ***
+#  Cow.Breed02  -1.5741     0.2558  -6.155 7.51e-10 ***
+#  ---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+#(Dispersion parameter for binomial family taken to be 1)
+
+#Null deviance: 705.87  on 711  degrees of freedom
+#Residual deviance: 657.07  on 710  degrees of freedom
+#AIC: 661.07
+
+#Number of Fisher Scoring iterations: 5
+
+#Calculating the 95% Confidence interval and the Odds Ratio
+exp(cbind(OR = coef(BS.NEFA.0.7_Cow.Breed), confint(BS.NEFA.0.7_Cow.Breed)))
+
+#                   OR     2.5 %    97.5 %
+#(Intercept) 0.3785489 0.3057421 0.4655875
+#Cow.Breed02 0.2071895 0.1222402 0.3347772
+```
+- We find that, at a significance level of 0.05, this association is: Statistically Significant
+- The 95% Confidence Interval estimates that the true OR is between: 0.1222 & 0.3348
+- The Odds Ratio is: 0.2072
+- If a cow is a Braunvieh it is less likely to have a high NEFA level than a simental cow. 
+
+
+2x2 table
+```r
+table(hp2$Cow.Breed, hp2$BS.NEFA.0.7.2)
+#       1   0
+#01 120 317
+#02  20 255
+```
+Proportion Bar Graph:
+  <img src="https://user-images.githubusercontent.com/52465712/61131821-71b3ec80-a4ba-11e9-8de4-8e9120dacb21.png" width="300">
+  
+  
+  
+  #### BS.NEFA.0.7 ~ Hfr.or.Cow - Heifer/Cow status compared to high or low NEFA levels (cutoff: 0.7)
+  ```r
+#Logistic Regression Test
+BS.NEFA.0.7_Hfr.or.Cow <- glm(BS.NEFA.0.7 ~ Hfr.or.Cow, data = hp2, family = binomial(link=logit))
+summary(BS.NEFA.0.7_Hfr.or.Cow)
+
+#Coefficients:
+#Estimate Std. Error z value Pr(>|z|)    
+#(Intercept)    -1.4884     0.1148 -12.965   <2e-16 ***
+#  Hfr.or.Cowhfr   0.2634     0.2018   1.306    0.192    
+#---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+#(Dispersion parameter for binomial family taken to be 1)
+
+#Null deviance: 705.87  on 711  degrees of freedom
+#Residual deviance: 704.19  on 710  degrees of freedom
+#AIC: 708.19
+
+#Number of Fisher Scoring iterations: 4
+
+#Calculating the 95% Confidence interval and the Odds Ratio
+exp(cbind(OR = coef(BS.NEFA.0.7_Hfr.or.Cow), confint(BS.NEFA.0.7_Hfr.or.Cow)))
+
+#                   OR     2.5 %    97.5 %
+#(Intercept)   0.2257282 0.1792367 0.2812568
+#Hfr.or.Cowhfr 1.3013441 0.8714497 1.9246815
+```
+- We find that, at a significance level of 0.05, this association is: Not Statistically Significant
+- The 95% Confidence Interval estimates that the true OR is between: 0.8714 & 1.9247
+- The Odds Ratio is: 1.3013
+
+hp2$Hfr.or.Cow.2 <- relevel(hp2$Hfr.or.Cow, ref = "hfr")
+
+2x2 table
+```r
+#relevel Hfr.or.Cow
+hp2$Hfr.or.Cow.2 <- relevel(hp2$Hfr.or.Cow, ref = "hfr")
+
+table(hp2$Hfr.or.Cow.2, hp2$BS.NEFA.0.7.2)
+#        1   0
+#hfr  47 160
+#cow  93 412
+```
+Proportion Bar Graph:
+  <img src="https://user-images.githubusercontent.com/52465712/61131821-71b3ec80-a4ba-11e9-8de4-8e9120dacb21.png" width="300">
+  
+  
+  
+  
+  #### BS.NEFA.0.7 ~ BS.Month_warm - Heat samples were taken compared to high or low NEFA levels (cutoff: 0.7)
+  ```r
+#Logistic Regression Test
+BS.NEFA.0.7_BS.Month_warm <- glm(BS.NEFA.0.7 ~ BS.Month_warm, data = hp2, family = binomial(link=logit))
+summary(BS.NEFA.0.7_BS.Month_warm)
+
+#Coefficients:
+#Estimate Std. Error z value Pr(>|z|)    
+#(Intercept)     -1.6245     0.1347 -12.062   <2e-16 ***
+#  BS.Month_warm1   0.4605     0.1894   2.431    0.015 *  
+#  ---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+#(Dispersion parameter for binomial family taken to be 1)
+
+#Null deviance: 705.87  on 711  degrees of freedom
+#Residual deviance: 699.94  on 710  degrees of freedom
+#AIC: 703.94
+
+#Number of Fisher Scoring iterations: 4
+
+#Calculating the 95% Confidence interval and the Odds Ratio
+exp(cbind(OR = coef(BS.NEFA.0.7_BS.Month_warm), confint(BS.NEFA.0.7_BS.Month_warm)))
+
+#                   OR     2.5 %    97.5 %
+#(Intercept)    0.1970149 0.150066 0.2546429
+#BS.Month_warm1 1.5848357 1.093870 2.3007629
+```
+- We find that, at a significance level of 0.05, this association is: Statistically Significant
+- The 95% Confidence Interval estimates that the true OR is between: 1.0939 & 2.3008
+- The Odds Ratio is: 1.5848
+- If the sample was taken in a warmer month it is less more to have a high NEFA level than a sample taken in colder months. 
+
+
+2x2 table
+```r
+#relevel BS.Month
+hp2$BS.Month_warm.2 <- relevel(hp2$BS.Month_warm, ref = "1")
+
+table(hp2$BS.Month_warm.2, hp2$BS.NEFA.0.7.2)
+#    1   0
+#1  74 237
+#0  66 335
+```
+Proportion Bar Graph:
+  <img src="https://user-images.githubusercontent.com/52465712/61131821-71b3ec80-a4ba-11e9-8de4-8e9120dacb21.png" width="300">
+  
+  
+  
+  
+  #### BS.NEFA.0.7 ~ CE.Skin.Dehydration - Cow's skin dehydration levels compared to high or low NEFA levels (cutoff: 0.7)
+  ```r
+#Logistic Regression Test
+BS.NEFA.0.7_CE.Skin.Dehydration <- glm(BS.NEFA.0.7 ~ CE.Skin.Dehydration, data = hp2, family = binomial(link=logit))
+summary(BS.NEFA.0.7_CE.Skin.Dehydration)
+
+#Coefficients:
+#Estimate Std. Error z value Pr(>|z|)    
+#(Intercept)            -1.40307    0.09678 -14.497   <2e-16 ***
+#  CE.Skin.Dehydrationred  0.19910    0.47543   0.419    0.675    
+#---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+#(Dispersion parameter for binomial family taken to be 1)
+
+#Null deviance: 697.78  on 699  degrees of freedom
+#Residual deviance: 697.61  on 698  degrees of freedom
+#(12 observations deleted due to missingness)
+#AIC: 701.61
+
+#Number of Fisher Scoring iterations: 4
+
+#Calculating the 95% Confidence interval and the Odds Ratio
+exp(cbind(OR = coef(BS.NEFA.0.7_CE.Skin.Dehydration), confint(BS.NEFA.0.7_CE.Skin.Dehydration)))
+
+#                   OR     2.5 %    97.5 %
+#(Intercept)            0.245841 0.2025916 0.2961601
+#CE.Skin.Dehydrationred 1.220301 0.4391765 2.9292086
+```
+- We find that, at a significance level of 0.05, this association is: Not Statistically Significant
+- The 95% Confidence Interval estimates that the true OR is between: 0.4392 & 2.9292
+- The Odds Ratio is: 1.2203
+
+
+2x2 table
+```r
+#relevel CE.Skin.Dehydration
+hp2$CE.Skin.Dehydration.2 <- relevel(hp2$CE.Skin.Dehydration, ref = "red")
+
+table(hp2$CE.Skin.Dehydration.2, hp2$BS.NEFA.0.7.2)
+#        1   0
+#red   6  20
+#phy 133 541
+```
+Proportion Bar Graph:
+  <img src="https://user-images.githubusercontent.com/52465712/61131821-71b3ec80-a4ba-11e9-8de4-8e9120dacb21.png" width="300">
+  
+  
+  
+  
+  #### BS.NEFA.0.7 ~ CE.Stom.Tension - Cow stomach tension compared to high or low NEFA levels (cutoff: 0.7)
+  ```r
+#Logistic Regression Test
+BS.NEFA.0.7_CE.Stom.Tension <- glm(BS.NEFA.0.7 ~ CE.Stom.Tension, data = hp2, family = binomial(link=logit))
+summary(BS.NEFA.0.7_CE.Stom.Tension)
+
+#Coefficients:
+#Estimate Std. Error z value Pr(>|z|)    
+#(Intercept)        -1.35576    0.09725 -13.942   <2e-16 ***
+#  CE.Stom.Tensionerh -0.63667    0.44592  -1.428    0.153    
+#---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+#(Dispersion parameter for binomial family taken to be 1)
+
+#Null deviance: 697.34  on 698  degrees of freedom
+#Residual deviance: 694.99  on 697  degrees of freedom
+#(13 observations deleted due to missingness)
+#AIC: 698.99
+
+#Number of Fisher Scoring iterations: 4
+
+#Calculating the 95% Confidence interval and the Odds Ratio
+exp(cbind(OR = coef(BS.NEFA.0.7_CE.Stom.Tension), confint(BS.NEFA.0.7_CE.Stom.Tension)))
+
+#                   OR     2.5 %    97.5 %
+#(Intercept)        0.2577519 0.2122269 0.3108083
+#CE.Stom.Tensionerh 0.5290499 0.1988182 1.1774042
+```
+- We find that, at a significance level of 0.05, this association is: Not Statistically Significant
+- The 95% Confidence Interval estimates that the true OR is between: 0.1988 & 1.1774
+- The Odds Ratio is: 0.5290
+
+
+2x2 table
+```r
+#Relevel CE.Stom.Tension
+hp2$CE.Stom.Tension.2 <- relevel(hp2$CE.Stom.Tension, ref = "erh")
+
+table(hp2$CE.Stom.Tension.2, hp2$BS.NEFA.0.7.2)
+#        1   0
+#erh   6  44
+#phy 133 516
+```
+Proportion Bar Graph:
+  <img src="https://user-images.githubusercontent.com/52465712/61131821-71b3ec80-a4ba-11e9-8de4-8e9120dacb21.png" width="300">
+  
+  
+  
+  
+  #### BS.NEFA.0.7 ~ CE.Stom.Layering - Rumen layering compared to high or low NEFA levels (cutoff: 0.7)
+  ```r
+#Logistic Regression Test
+BS.NEFA.0.7_CE.Stom.Layering <- glm(BS.NEFA.0.7 ~ CE.Stom.Layering, data = hp2, family = binomial(link=logit))
+summary(BS.NEFA.0.7_CE.Stom.Layering)
+
+#Coefficients:
+#Estimate Std. Error z value Pr(>|z|)   
+#(Intercept)       -3.090e-14  4.472e-01   0.000  1.00000   
+#CE.Stom.Layering1 -1.448e+00  4.578e-01  -3.164  0.00156 **
+#  ---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+#(Dispersion parameter for binomial family taken to be 1)
+
+#Null deviance: 696.90  on 697  degrees of freedom
+#Residual deviance: 687.57  on 696  degrees of freedom
+#(14 observations deleted due to missingness)
+#AIC: 691.57
+
+#Number of Fisher Scoring iterations: 4
+
+#Calculating the 95% Confidence interval and the Odds Ratio
+exp(cbind(OR = coef(BS.NEFA.0.7_CE.Stom.Layering), confint(BS.NEFA.0.7_CE.Stom.Layering)))
+
+#                   OR     2.5 %    97.5 %
+#(Intercept)       1.0000000 0.41037815 2.4367769
+#CE.Stom.Layering1 0.2349727 0.09452058 0.5839427
+```
+- We find that, at a significance level of 0.05, this association is: Statistically Significant
+- The 95% Confidence Interval estimates that the true OR is between: 0.0945 & 0.5839
+- The Odds Ratio is: 0.2350
+- If a cow has strange rumen layering it is less likely to have a high NEFA level than a cow with regular layering. 
+
+
+2x2 table
+```r
+#Relevel CE.Stom.Layering
+hp2$CE.Stom.Layering.2 <- relevel(hp2$CE.Stom.Layering, ref = "1")
+
+table(hp2$CE.Stom.Layering.2, hp2$BS.NEFA.0.7.2)
+#      1   0
+#1 129 549
+#0  10  10
+```
+Proportion Bar Graph:
+  <img src="https://user-images.githubusercontent.com/52465712/61131821-71b3ec80-a4ba-11e9-8de4-8e9120dacb21.png" width="300">
+  
+  
+  
+  
+  #### BS.NEFA.0.7 ~ CE.Stom.Fluid.Movement - Rumen Fluid Movement compared to high or low NEFA levels (cutoff: 0.7)
+  ```r
+#Logistic Regression Test
+BS.NEFA.0.7_CE.Stom.Fluid.Movement <- glm(BS.NEFA.0.7 ~ CE.Stom.Fluid.Movement, data = hp2, family = binomial(link=logit))
+summary(BS.NEFA.0.7_CE.Stom.Fluid.Movement)
+
+#Coefficients:
+#Estimate Std. Error z value Pr(>|z|)    
+#(Intercept)              -1.39002    0.09655 -14.397   <2e-16 ***
+#  CE.Stom.Fluid.Movementre -0.04507    0.50689  -0.089    0.929    
+#---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+#(Dispersion parameter for binomial family taken to be 1)
+
+#Null deviance: 696.90  on 697  degrees of freedom
+#Residual deviance: 696.89  on 696  degrees of freedom
+#(14 observations deleted due to missingness)
+#AIC: 700.89
+
+#Number of Fisher Scoring iterations: 4
+
+#Calculating the 95% Confidence interval and the Odds Ratio
+exp(cbind(OR = coef(BS.NEFA.0.7_CE.Stom.Fluid.Movement), confint(BS.NEFA.0.7_CE.Stom.Fluid.Movement)))
+
+#                   OR     2.5 %    97.5 %
+#(Intercept)              0.2490706 0.2053574 0.2999238
+#CE.Stom.Fluid.Movementre 0.9559346 0.3146346 2.3954315
+```
+- We find that, at a significance level of 0.05, this association is: Not Statistically Significant
+- The 95% Confidence Interval estimates that the true OR is between: 0.3146 & 2.3954
+- The Odds Ratio is: 0.9559
+
+
+2x2 table
+```r
+#Relevel CE.Stom.Fluid.Movement
+hp2$CE.Stom.Fluid.Movement.2 <- relevel(hp2$CE.Stom.Fluid.Movement, ref = "re")
+
+table(hp2$CE.Stom.Fluid.Movement.2, hp2$BS.NEFA.0.7.2)
+#        1   0
+#re    5  21
+#obb 134 538
+```
+Proportion Bar Graph:
+  <img src="https://user-images.githubusercontent.com/52465712/61131821-71b3ec80-a4ba-11e9-8de4-8e9120dacb21.png" width="300">
+  
+  
+  
+  
+  #### BS.NEFA.0.7 ~ CE.Stom.Ping - Rumen ping compared to high or low NEFA levels (cutoff: 0.7)
+  ```r
+#Logistic Regression Test
+BS.NEFA.0.7_CE.Stom.Ping <- glm(BS.NEFA.0.7 ~ CE.Stom.Ping, data = hp2, family = binomial(link=logit))
+summary(BS.NEFA.0.7_CE.Stom.Ping)
+
+#Coefficients:
+#Estimate Std. Error z value Pr(>|z|)    
+#(Intercept)     -1.38809    0.09481  -14.64   <2e-16 ***
+#  CE.Stom.Pingre -13.17798  441.37170   -0.03    0.976    
+#---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+#(Dispersion parameter for binomial family taken to be 1)
+
+#Null deviance: 697.78  on 699  degrees of freedom
+#Residual deviance: 696.01  on 698  degrees of freedom
+#(12 observations deleted due to missingness)
+#AIC: 700.01
+
+#Number of Fisher Scoring iterations: 13
+
+#Calculating the 95% Confidence interval and the Odds Ratio
+exp(cbind(OR = coef(BS.NEFA.0.7_CE.Stom.Ping), confint(BS.NEFA.0.7_CE.Stom.Ping)))
+
+#                   OR     2.5 %    97.5 %
+#(Intercept)    2.495512e-01 0.2064831 2.995198e-01
+#CE.Stom.Pingre 1.891810e-06        NA 1.796654e+16
+```
+- We find that, at a significance level of 0.05, this association is: Not Statistically Significant
+- The 95% Confidence Interval estimates that the true OR is between: -NA & 1.796654e16
+- The Odds Ratio is: 1.891810e-6
+
+
+2x2 table
+```r
+#Relevel CE.Stom.Ping
+hp2$CE.Stom.Ping.2 <- relevel(hp2$CE.Stom.Ping, ref = "re")
+
+table(hp2$CE.Stom.Ping.2, hp2$BS.NEFA.0.7.2)
+#        1   0
+#re    0   4
+#obb 139 557
+```
+Proportion Bar Graph:
+  <img src="https://user-images.githubusercontent.com/52465712/61131821-71b3ec80-a4ba-11e9-8de4-8e9120dacb21.png" width="300">
+  
+  
+  
+ 
+  #### BS.NEFA.0.7 ~ CE.Stom.Fullness - Fullness of rumen compared to high or low NEFA levels (cutoff: 0.7)
+  ```r
+#Logistic Regression Test
+BS.NEFA.0.7_CE.Stom.Fullness.2 <- glm(BS.NEFA.0.7 ~ CE.Stom.Fullness.2, data = hp2, family = binomial(link=logit))
+summary(BS.NEFA.0.7_CE.Stom.Fullness.2)
+
+#Coefficients:
+#Estimate Std. Error z value Pr(>|z|)  
+#(Intercept)               -0.6568     0.3293  -1.994   0.0461 *
+#  CE.Stom.Fullness.2normal  -0.8077     0.3439  -2.349   0.0188 *
+#  ---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+#(Dispersion parameter for binomial family taken to be 1)
+
+#Null deviance: 705.87  on 711  degrees of freedom
+#Residual deviance: 700.81  on 710  degrees of freedom
+#AIC: 704.81
+
+#Number of Fisher Scoring iterations: 4
+
+#Calculating the 95% Confidence interval and the Odds Ratio
+exp(cbind(OR = coef(BS.NEFA.0.7_CE.Stom.Fullness.2), confint(BS.NEFA.0.7_CE.Stom.Fullness.2)))
+
+#                   OR     2.5 %    97.5 %
+#(Intercept)              0.5185185 0.2643872 0.9726523
+#CE.Stom.Fullness.2normal 0.4458716 0.2306677 0.8973266
+```
+- We find that, at a significance level of 0.05, this association is: Statistically Significant
+- The 95% Confidence Interval estimates that the true OR is between: 0.1222 & 0.3348
+- The Odds Ratio is: 0.2072
+- If a cow has a normal stomach fullness it is less likely to have a high NEFA level than a abnormal stomach fullness cow. 
+
+
+2x2 table
+```r
+table(hp2$CE.Stom.Fullness.2, hp2$BS.NEFA.0.7.2)
+#           1   0
+#abnorm  14  27
+#normal 126 545
+```
+Proportion Bar Graph:
+  <img src="https://user-images.githubusercontent.com/52465712/61131821-71b3ec80-a4ba-11e9-8de4-8e9120dacb21.png" width="300">
+  
+  
+  
+  
+  #### BS.NEFA.0.7 ~ CE.Stom.Noise.Freq - Rumen noise frequency mpared to high or low NEFA levels (cutoff: 0.7)
+  ```r
+#Logistic Regression Test
+BS.NEFA.0.7_CE.Stom.Noise.Freq.2 <- glm(BS.NEFA.0.7 ~ CE.Stom.Noise.Freq.2, data = hp2, family = binomial(link=logit))
+summary(BS.NEFA.0.7_CE.Stom.Noise.Freq.2)
+
+#Coefficients:
+#Estimate Std. Error z value Pr(>|z|)    
+#(Intercept)                 -1.5294     0.2163  -7.070 1.55e-12 ***
+#  CE.Stom.Noise.Freq.2bis_2    1.2192     0.3544   3.441 0.000581 ***
+#  CE.Stom.Noise.Freq.2groe_3  -0.9555     0.7671  -1.246 0.212913    
+#---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+#(Dispersion parameter for binomial family taken to be 1)
+
+#Null deviance: 237.86  on 223  degrees of freedom
+#Residual deviance: 221.75  on 221  degrees of freedom
+#(488 observations deleted due to missingness)
+#AIC: 227.75
+
+#Number of Fisher Scoring iterations: 5
+
+#Calculating the 95% Confidence interval and the Odds Ratio
+exp(cbind(OR = coef(BS.NEFA.0.7_CE.Stom.Noise.Freq.2), confint(BS.NEFA.0.7_CE.Stom.Noise.Freq.2)))
+
+#                   OR     2.5 %    97.5 %
+#(Intercept)                0.2166667 0.13882230 0.3253083
+#CE.Stom.Noise.Freq.2bis_2  3.3846154 1.68917111 6.8120909
+#CE.Stom.Noise.Freq.2groe_3 0.3846154 0.05950278 1.4100181
+```
+- 
+- We find that, at a significance level of 0.05, this association is: Statistically Significant for an Under-active stomach, and Not Statistically Significant for an over-active stomach
+- The 95% Confidence Interval estimates that the true OR is between: 1.6892 & 6.821 for an under-active stomach, and between 0.0595 & 1.4100 for an over-active stomach
+- The Odds Ratio is: 3.3846 for an under-active stomach, and 0.3846 for an over-active stomach.
+- If a cow has an under-actve stomach, it is more likely to have a high NEFA level than a cow with a normally active stomach. 
+
+
+2x2 table
+```r
+table(hp2$CE.Stom.Noise.Freq, hp2$BS.NEFA.0.7.2)
+#          1   0
+#bis_2   22  30
+#groe_3   2  24
+#phy     26 120
+```
+Proportion Bar Graph:
+  <img src="https://user-images.githubusercontent.com/52465712/61131821-71b3ec80-a4ba-11e9-8de4-8e9120dacb21.png" width="300">
+  
+  
+
+  
+  
+  #### BS.NEFA.0.7 ~ CE.Waste.Consistency - Waste consistency compared to high or low NEFA levels (cutoff: 0.7)
+  ```r
+#Logistic Regression Test
+BS.NEFA.0.7_CE.Waste.Consistency <- glm(BS.NEFA.0.7 ~ CE.Waste.Consistency, data = hp2, family = binomial(link=logit))
+summary(BS.NEFA.0.7_CE.Waste.Consistency)
+
+#Coefficients:
+#Estimate Std. Error z value Pr(>|z|)    
+#(Intercept)                -1.4200     0.1103 -12.870  < 2e-16 ***
+#  CE.Waste.Consistencythick   0.9988     0.3017   3.310 0.000932 ***
+#  CE.Waste.Consistencythin   -0.5560     0.3058  -1.818 0.069004 .  
+#---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+#(Dispersion parameter for binomial family taken to be 1)
+
+#Null deviance: 688.66  on 691  degrees of freedom
+#Residual deviance: 672.92  on 689  degrees of freedom
+#(20 observations deleted due to missingness)
+#AIC: 678.92
+
+#Number of Fisher Scoring iterations: 4
+
+#Calculating the 95% Confidence interval and the Odds Ratio
+exp(cbind(OR = coef(BS.NEFA.0.7_CE.Waste.Consistency), confint(BS.NEFA.0.7_CE.Waste.Consistency)))
+
+#                   OR     2.5 %    97.5 %
+#(Intercept)               0.2417062 0.1937296 0.2986998
+#CE.Waste.Consistencythick 2.7150735 1.4857175 4.8773670
+#CE.Waste.Consistencythin  0.5734809 0.3031144 1.0136746
+```
+- 
+  - We find that, at a significance level of 0.05, this association is: Statistically Significant for thick, and Not Statistically Significant for thin
+- The 95% Confidence Interval estimates that the true OR is between: 1.4857 & 4.8774 for thick, and between 0.3031 & 1.0137 for thin
+- The Odds Ratio is: 2.7151 for thick, and 0.5735 for thin
+- If a cow has a thick waste consistency, it is more likely to have a high NEFA level than a cow with a normal waste consistency. 
+
+
+2x2 table
+```r
+table(hp2$CE.Waste.Consistency, hp2$BS.NEFA.0.7.2)
+#          1   0
+#  norm  102 422
+#thick  21  32
+#thin   14 101
+```
+Proportion Bar Graph:
+  <img src="https://user-images.githubusercontent.com/52465712/61131821-71b3ec80-a4ba-11e9-8de4-8e9120dacb21.png" width="300">
+  
+
+  
+  
+  
+  #### BS.NEFA.0.7 ~ CE.Waste.Digestion - Amount digested compared to high or low NEFA levels (cutoff: 0.7)
+  ```r
+#Logistic Regression Test
+BS.NEFA.0.7_CE.Waste.Digestion <- glm(BS.NEFA.0.7 ~ CE.Waste.Digestion, data = hp2, family = binomial(link=logit))
+summary(BS.NEFA.0.7_CE.Waste.Digestion)
+
+#Coefficients:
+#Estimate Std. Error z value Pr(>|z|)    
+#(Intercept)              -1.37913    0.10919  -12.63   <2e-16 ***
+#  CE.Waste.Digestionmaess  -0.07724    0.22737   -0.34    0.734    
+#CE.Waste.Digestionschl  -13.18694  441.37170   -0.03    0.976    
+#---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+#(Dispersion parameter for binomial family taken to be 1)
+
+#Null deviance: 684.97  on 689  degrees of freedom
+#Residual deviance: 683.10  on 687  degrees of freedom
+#(22 observations deleted due to missingness)
+#AIC: 689.1
+
+#Number of Fisher Scoring iterations: 13
+
+#Calculating the 95% Confidence interval and the Odds Ratio
+exp(cbind(OR = coef(BS.NEFA.0.7_CE.Waste.Digestion), confint(BS.NEFA.0.7_CE.Waste.Digestion)))
+
+#                   OR     2.5 %    97.5 %
+#(Intercept)             2.517986e-01 0.2023145 3.105324e-01
+#CE.Waste.Digestionmaess 9.256713e-01 0.5854282 1.431178e+00
+#CE.Waste.Digestionschl  1.874925e-06        NA 1.773877e+16
+
+```
+- 
+  - We find that, at a significance level of 0.05, this association is: Not Statistically Significant
+- The 95% Confidence Interval estimates that the true OR is between: 0.5854 & 1.4312 for okay digestion, and between NA & 1.773877e16 for bad digestion
+- The Odds Ratio is: 0.92567 for okay digestion, and 0.000 for bad digestion.
+
+
+2x2 table
+```r
+table(hp2$CE.Waste.Digestion, hp2$BS.NEFA.0.7.2)
+#          1   0
+#gut   105 417
+#maess  31 133
+#schl    0   4
+```
+Proportion Bar Graph:
+  <img src="https://user-images.githubusercontent.com/52465712/61131821-71b3ec80-a4ba-11e9-8de4-8e9120dacb21.png" width="300">
+  
+
+  
+  #### BS.NEFA.0.7 ~ CE.Locomotion.Score - Locomotion score compared to high or low NEFA levels (cutoff: 0.7)
+  ```r
+#Logistic Regression Test
+BS.NEFA.0.7_CE.Locomotion.Score <- glm(BS.NEFA.0.7 ~ CE.Locomotion.Score, data = hp2, family = binomial(link=logit))
+summary(BS.NEFA.0.7_CE.Locomotion.Score)
+
+#Coefficients:
+#Estimate Std. Error z value Pr(>|z|)    
+#(Intercept)           -1.8489     0.1506 -12.273  < 2e-16 ***
+#  CE.Locomotion.Score2   0.6915     0.2158   3.203  0.00136 ** 
+#  CE.Locomotion.Score3   0.4837     0.3568   1.356  0.17522    
+#CE.Locomotion.Score4   2.4085     0.4681   5.145 2.67e-07 ***
+#  CE.Locomotion.Score5  16.4150   624.1938   0.026  0.97902    
+#---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+#(Dispersion parameter for binomial family taken to be 1)
+
+#Null deviance: 678.45  on 687  degrees of freedom
+#Residual deviance: 639.70  on 683  degrees of freedom
+#(24 observations deleted due to missingness)
+#AIC: 649.7
+
+#Number of Fisher Scoring iterations: 13
+
+#Calculating the 95% Confidence interval and the Odds Ratio
+exp(cbind(OR = coef(BS.NEFA.0.7_CE.Locomotion.Score), confint(BS.NEFA.0.7_CE.Locomotion.Score)))
+
+#                   OR     2.5 %    97.5 %
+#(Intercept)          1.574074e-01 1.158548e-01  0.209374
+#CE.Locomotion.Score2 1.996639e+00 1.308147e+00  3.053963
+#CE.Locomotion.Score3 1.622028e+00 7.769023e-01  3.181273
+#CE.Locomotion.Score4 1.111765e+01 4.533349e+00 29.098331
+#CE.Locomotion.Score5 1.345667e+07 3.775440e-36        NA
+```
+- 
+  - We find that, at a significance level of 0.05, this association is: Statistically Significant for a score of 2 and 4, and Not Statistically Significant for a score of 3 or 5
+- The 95% Confidence Interval estimates that the true OR is between: 1.3081 & 3.0540 for a score of 2, and between 4.5333 & 29.0983 for a score of 4
+- The Odds Ratio is: 1.9966 for a score of 2, and 1.1118 for a score of 4.
+- If a cow has a locomotion score of 2, it is more likely to have a high NEFA level than a cow with a score of 1. 
+- If a cow has a locomotion score of 4, it is much likely to have a high NEFA level than a cow with a score of 1. 
+
+2x2 table
+```r
+table(hp2$CE.Locomotion.Score, hp2$BS.NEFA.0.7.2)
+#      1   0
+#1  51 324
+#2  55 175
+#3  12  47
+#4  14   8
+#5   2   0
+```
+Proportion Bar Graph:
+  <img src="https://user-images.githubusercontent.com/52465712/61131821-71b3ec80-a4ba-11e9-8de4-8e9120dacb21.png" width="300">
+  
+  
+  
+  #### BS.NEFA.0.7 ~ CE.Lame - Lameness to high or low NEFA levels (cutoff: 0.7)
+  ```r
+#Logistic Regression Test
+BS.NEFA.0.7_CE.Lame <- glm(BS.NEFA.0.7 ~ CE.Lame, data = hp2, family = binomial(link=logit))
+summary(BS.NEFA.0.7_CE.Lame)
+
+#Coefficients:
+#Estimate Std. Error z value Pr(>|z|)    
+#(Intercept)  -1.5295     0.1042 -14.675  < 2e-16 ***
+#  CE.Lame1      0.8544     0.2545   3.358 0.000786 ***
+#  ---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+#(Dispersion parameter for binomial family taken to be 1)
+
+#Null deviance: 705.87  on 711  degrees of freedom
+#Residual deviance: 695.41  on 710  degrees of freedom
+#AIC: 699.41
+
+#Number of Fisher Scoring iterations: 4
+
+#Calculating the 95% Confidence interval and the Odds Ratio
+exp(cbind(OR = coef(BS.NEFA.0.7_CE.Lame), confint(BS.NEFA.0.7_CE.Lame)))
+
+#                   OR     2.5 %    97.5 %
+#(Intercept) 0.2166344 0.1757818 0.2645954
+#CE.Lame1    2.3500000 1.4123548 3.8428114
+```
+- 
+  - We find that, at a significance level of 0.05, this association is: Statistically Significant
+- The 95% Confidence Interval estimates that the true OR is between: 1.4124 & 3.8428 
+- The Odds Ratio is: 2.3500 
+- If a cow is lame, it is more likely to have a high NEFA level than a cow who is not lame. 
+
+
+2x2 table
+```r
+table(hp2$CE.Lame, hp2$BS.NEFA.0.7.2)
+#    1   0
+#1  28  55
+#0 112 517
+```
+Proportion Bar Graph:
+  <img src="https://user-images.githubusercontent.com/52465712/61131821-71b3ec80-a4ba-11e9-8de4-8e9120dacb21.png" width="300">
+  
+  
+  
+  #### BS.NEFA.0.7 ~ BS.BHBA.1.2 - BHBA levels to high or low NEFA levels (cutoff: 0.7)
+  ```r
+#Logistic Regression Test
+BS.NEFA.0.7_BS.BHBA.1.2 <- glm(BS.NEFA.0.7 ~ BS.BHBA.1.2, data = hp2, family = binomial(link=logit))
+summary(BS.NEFA.0.7_BS.BHBA.1.2)
+
+#Coefficients:
+#Estimate Std. Error z value Pr(>|z|)    
+#(Intercept)   -1.6996     0.1153 -14.744  < 2e-16 ***
+#  BS.BHBA.1.21   1.1888     0.2113   5.625 1.85e-08 ***
+#  ---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+#(Dispersion parameter for binomial family taken to be 1)
+
+#Null deviance: 705.87  on 711  degrees of freedom
+#Residual deviance: 675.83  on 710  degrees of freedom
+#AIC: 679.83
+
+#Number of Fisher Scoring iterations: 4
+
+#Calculating the 95% Confidence interval and the Odds Ratio
+exp(cbind(OR = coef(BS.NEFA.0.7_BS.BHBA.1.2), confint(BS.NEFA.0.7_BS.BHBA.1.2)))
+
+#                   OR     2.5 %    97.5 %
+#(Intercept)  0.1827515 0.1448953 0.2277974
+#BS.BHBA.1.21 3.2831461 2.1643013 4.9624374
+```
+- 
+  - We find that, at a significance level of 0.05, this association is: Statistically Significant
+- The 95% Confidence Interval estimates that the true OR is between: 2.1643 & 4.9624 
+- The Odds Ratio is: 3.2831 
+- If a cow has a high BHBA level, it is more likely to have a high NEFA level than a cow who has a low level. 
+
+
+2x2 table
+```r
+table(hp2$BS.BHBA.1.2, hp2$BS.NEFA.0.7.2)
+#      1   0
+#1  51  85
+#0  89 487
+```
+Proportion Bar Graph:
+  <img src="https://user-images.githubusercontent.com/52465712/61131821-71b3ec80-a4ba-11e9-8de4-8e9120dacb21.png" width="300">
+  
+  
 
 
 --------
 ## Results
 
+#### Statistically Significant Variables
+Numerical Variables:
+- BS.BHBA, MS.DIM, MS.Fat, MS.Protein, MS.pH, MS.NSFA, MS.Acetone.Log, MS.BHBA, MS.MFA, MS.PFA, MS.SFA, MS.Stearine, MS.Oleic, MS.NEFA, CE.Environ.Temp, CE.Fat.Level, BS.DIM, BS.MS.Date.Difference, Hapto.Log
+Factor Variables:
+- Cow.Breed, CE.Stom.Layering, CE.Waste.Consistency, CE.Locomotion Score, CE.Stom.Noise.Freq, CE.Lame, BS.Month_warm, CE.Stom.Fullness, BS.BHBA.1.2, 
 
+#### Statistically Insignificant Variables
+Numerical Variables:
+- Calving.No, Milk.Yield, MS.Milk.Yield, MS.Lactose, MS.Urea, MS.S.Cell.Count.Log, MS.Palmeic, CE.Temp
+Factor Variables:
+- Hfr.or.Cow, CE.Skin.Dehydration, CE.Stom.Tension, CE.Stom.Fluid.Movement, CE.Stom.Ping, CE.Waste.Digestion
 
