@@ -671,7 +671,1034 @@ Scatterplot:
 --------
 ## Bi-Variate Statistics - Comparing Numeric Variables to BS.NEFA.1.2
 
+Now we will test the associations between BS.NEFA.0.7 and numerical variables
 
+For running all our t-tests below:
+  H0: beta1 = 0 (no association/no slope between the two variables)
+Ha: beta1 notequal 0 (some association/slope between the two variables)
+a = 0.05
+
+Our p-value represents the probability of getting a beta1 that matches the one found in our study, purely by chance. 
+If this p-value is below 0.05, this is statistically significant and provides convincing evidence against H0.
+So we reject H0. There is an association/slope between the two variables
+If this p-value is above 0.05, this is not statistically significant and does not provide convincing evidence against H0.
+So we fail to reject H0. There is no convincing evidence that there is an association/slope between the two variables.
+
+
+
+#### BS.NEFA.0.7 ~ Hapto.Log - Testing how the cow's haptoglobin levels affected the cow's NEFA levels with a cutoff value
+```r
+#Logistic regression test
+BS.NEFA.0.7_Hapto.Log <- glm(BS.NEFA.0.7 ~ Hapto.Log, data = hp2, family = binomial(link=logit))
+summary(BS.NEFA.0.7_Hapto.Log)
+
+#Coefficients:
+#Estimate Std. Error z value Pr(>|z|)    
+#(Intercept) -3.14013    0.29216 -10.748  < 2e-16 ***
+#  Hapto.Log    0.22254    0.03375   6.594 4.27e-11 ***
+#  ---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+#(Dispersion parameter for binomial family taken to be 1)
+
+#Null deviance: 705.87  on 711  degrees of freedom
+#Residual deviance: 663.13  on 710  degrees of freedom
+#AIC: 667.13
+
+#Number of Fisher Scoring iterations: 4
+
+#Calculating the 95% Confidence interval and the Odds Ratio
+exp(cbind(OR = coef(BS.NEFA.0.7_Hapto.Log), confint(BS.NEFA.0.7_Hapto.Log)))
+
+#                     OR     2.5 %     97.5 %
+#(Intercept) 0.04327727 0.02417083 0.07609058
+#Hapto.Log   1.24924297 1.16944614 1.33516986
+
+```
+- We find that, at a significance level of 0.05, this association is: Statistically Significant
+- The 95% Confidence Interval estimates that the true OR is between: 1.1694 & 1.3352
+- The Odds Ratio is: 1.2492
+
+<img src="https://user-images.githubusercontent.com/52465712/61130229-81313680-a4b6-11e9-856f-8000c24a1e85.png" width="300">
+  
+
+  
+  
+  #### BS.NEFA.0.7 ~ BS.BHBA.Log - Testing how the cow's BHBA levels affected the cow's NEFA levels with a cutoff value
+  ```r
+#Logistic regression test
+BS.NEFA.0.7_BS.BHBA.Log <- glm(BS.NEFA.0.7 ~ BS.BHBA.Log, data = hp2, family = binomial(link=logit))
+summary(BS.NEFA.0.7_BS.BHBA.Log)
+
+#Coefficients:
+#Estimate Std. Error z value Pr(>|z|)    
+#(Intercept) -1.22241    0.09905 -12.342  < 2e-16 ***
+#  BS.BHBA.Log  1.32594    0.19680   6.737 1.61e-11 ***
+#  ---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+#(Dispersion parameter for binomial family taken to be 1)
+
+#Null deviance: 705.87  on 711  degrees of freedom
+#Residual deviance: 657.13  on 710  degrees of freedom
+#AIC: 661.13
+
+#Number of Fisher Scoring iterations: 4
+
+#Calculating the 95% Confidence interval and the Odds Ratio
+exp(cbind(OR = coef(BS.NEFA.0.7_BS.BHBA.Log), confint(BS.NEFA.0.7_BS.BHBA.Log)))
+
+#                     OR     2.5 %     97.5 %
+#(Intercept) 0.2945195 0.2418376 0.3566975
+#BS.BHBA.Log 3.7657158 2.5764675 5.5824351
+
+```
+- We find that, at a significance level of 0.05, this association is: Statistically Significant
+- The 95% Confidence Interval estimates that the true OR is between: 2.5765 & 5.5824
+- The Odds Ratio is: 3.7657
+
+<img src="https://user-images.githubusercontent.com/52465712/61130229-81313680-a4b6-11e9-856f-8000c24a1e85.png" width="300">
+  
+
+  
+  
+  #### BS.NEFA.0.7 ~ BS.DIM - Testing how the cow's DIM affected the cow's NEFA levels with a cutoff value
+  ```r
+#Logistic regression test
+BS.NEFA.0.7_BS.DIM <- glm(BS.NEFA.0.7 ~ BS.DIM, data = hp2, family = binomial(link=logit))
+summary(BS.NEFA.0.7_BS.DIM)
+
+#Coefficients:
+#Estimate Std. Error z value Pr(>|z|)    
+#(Intercept) -0.28746    0.29671  -0.969 0.332644    
+#BS.DIM      -0.05952    0.01550  -3.839 0.000123 ***
+#  ---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+#(Dispersion parameter for binomial family taken to be 1)
+
+#Null deviance: 705.87  on 711  degrees of freedom
+#Residual deviance: 690.59  on 710  degrees of freedom
+#AIC: 694.59
+
+#Number of Fisher Scoring iterations: 4
+
+#Calculating the 95% Confidence interval and the Odds Ratio
+exp(cbind(OR = coef(BS.NEFA.0.7_BS.DIM), confint(BS.NEFA.0.7_BS.DIM)))
+
+#                     OR     2.5 %     97.5 %
+#(Intercept) 0.7501695 0.4176751 1.3388568
+#BS.DIM      0.9422159 0.9136450 0.9709781
+
+```
+- We find that, at a significance level of 0.05, this association is: Statistically Significant
+- The 95% Confidence Interval estimates that the true OR is between: 0.9136 & 0.9710
+- The Odds Ratio is: 0.9422
+
+<img src="https://user-images.githubusercontent.com/52465712/61130229-81313680-a4b6-11e9-856f-8000c24a1e85.png" width="300">
+  
+
+  
+  
+  #### BS.NEFA.0.7 ~ BS.MS.Date.Difference - Testing how the difference between the sample taken days affected the cow's NEFA levels with a cutoff value
+  ```r
+#Logistic regression test
+BS.NEFA.0.7_BS.MS.Date.Difference <- glm(BS.NEFA.0.7 ~ BS.MS.Date.Difference, data = hp2, family = binomial(link=logit))
+summary(BS.NEFA.0.7_BS.MS.Date.Difference)
+
+#Coefficients:
+#Estimate Std. Error z value Pr(>|z|)    
+#(Intercept)            -1.2199     0.1208 -10.102   <2e-16 ***
+#  BS.MS.Date.Difference  -0.3637     0.1570  -2.316   0.0206 *  
+#  ---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+#(Dispersion parameter for binomial family taken to be 1)
+
+#Null deviance: 705.87  on 711  degrees of freedom
+#Residual deviance: 700.52  on 710  degrees of freedom
+#AIC: 704.52
+
+#Number of Fisher Scoring iterations: 4
+
+#Calculating the 95% Confidence interval and the Odds Ratio
+exp(cbind(OR = coef(BS.NEFA.0.7_BS.MS.Date.Difference), confint(BS.NEFA.0.7_BS.MS.Date.Difference)))
+
+#                     OR     2.5 %     97.5 %
+#(Intercept)           0.2952668 0.2317166 0.3723023
+#BS.MS.Date.Difference 0.6951242 0.5105606 0.9458406
+
+```
+- We find that, at a significance level of 0.05, this association is: Statistically Significant
+- The 95% Confidence Interval estimates that the true OR is between: 0.5106 & 0.9458
+- The Odds Ratio is: 0.6951
+
+<img src="https://user-images.githubusercontent.com/52465712/61130229-81313680-a4b6-11e9-856f-8000c24a1e85.png" width="300">
+  
+  
+  
+  #### BS.NEFA.0.7 ~ Calving.No - Testing how the cow's number of calves affected the cow's NEFA levels with a cutoff value
+  ```r
+#Logistic regression test
+BS.NEFA.0.7_Calving.No <- glm(BS.NEFA.0.7 ~ Calving.No, data = hp2, family = binomial(link=logit))
+summary(BS.NEFA.0.7_Calving.No)
+
+#Coefficients:
+# Estimate Std. Error z value Pr(>|z|)    
+#(Intercept) -1.32489    0.17144  -7.728 1.09e-14 ***
+#  Calving.No  -0.02744    0.04808  -0.571    0.568    
+#---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+#(Dispersion parameter for binomial family taken to be 1)
+
+#Null deviance: 705.87  on 711  degrees of freedom
+#Residual deviance: 705.54  on 710  degrees of freedom
+#AIC: 709.54
+
+#Number of Fisher Scoring iterations: 4
+
+#Calculating the 95% Confidence interval and the Odds Ratio
+exp(cbind(OR = coef(BS.NEFA.0.7_Calving.No), confint(BS.NEFA.0.7_Calving.No)))
+
+#                     OR     2.5 %     97.5 %
+#(Intercept) 0.2658330 0.1891393 0.3706532
+#Calving.No  0.9729317 0.8833916 1.0670633
+
+```
+- We find that, at a significance level of 0.05, this association is: Not Statistically Significant
+- The 95% Confidence Interval estimates that the true OR is between: 0.8834 & 1.0671
+- The Odds Ratio is: 0.9729
+
+<img src="https://user-images.githubusercontent.com/52465712/61130229-81313680-a4b6-11e9-856f-8000c24a1e85.png" width="300">
+  
+  
+  
+  #### BS.NEFA.0.7 ~ Milk.Yield - Testing how the cow's milk yield affects the cow's NEFA levels with a cutoff value
+  ```r
+#Logistic regression test
+BS.NEFA.0.7_Milk.Yield <- glm(BS.NEFA.0.7 ~ Milk.Yield, data = hp2, family = binomial(link=logit))
+summary(BS.NEFA.0.7_Milk.Yield)
+
+#Coefficients:
+#Estimate Std. Error z value Pr(>|z|)    
+#(Intercept) -1.86111    0.52663  -3.534 0.000409 ***
+#  Milk.Yield   0.02438    0.01562   1.561 0.118535    
+#---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+#(Dispersion parameter for binomial family taken to be 1)
+
+#Null deviance: 440.12  on 386  degrees of freedom
+#Residual deviance: 437.64  on 385  degrees of freedom
+#(325 observations deleted due to missingness)
+#AIC: 441.64
+
+#Number of Fisher Scoring iterations: 4
+
+#Calculating the 95% Confidence interval and the Odds Ratio
+exp(cbind(OR = coef(BS.NEFA.0.7_Milk.Yield), confint(BS.NEFA.0.7_Milk.Yield)))
+
+#                     OR     2.5 %     97.5 %
+#(Intercept) 0.1554998 0.05385953 0.4267294
+#Milk.Yield  1.0246815 0.99410724 1.0570552
+
+```
+- We find that, at a significance level of 0.05, this association is: Not Statistically Significant
+- The 95% Confidence Interval estimates that the true OR is between: 0.9941 & 1.0571
+- The Odds Ratio is: 1.0247
+
+<img src="https://user-images.githubusercontent.com/52465712/61130229-81313680-a4b6-11e9-856f-8000c24a1e85.png" width="300">
+  
+  
+  
+  #### BS.NEFA.0.7 ~ MS.Milk.Yield - Testing how the cow's milk sample yield affects the cow's NEFA levels with a cutoff value
+  ```r
+#Logistic regression test
+BS.NEFA.0.7_MS.Milk.Yield <- glm(BS.NEFA.0.7 ~ MS.Milk.Yield, data = hp2, family = binomial(link=logit))
+summary(BS.NEFA.0.7_MS.Milk.Yield)
+
+#Coefficients:
+#Estimate Std. Error z value Pr(>|z|)    
+#(Intercept)   -1.01724    0.26068  -3.902 9.53e-05 ***
+#  MS.Milk.Yield -0.02668    0.01694  -1.575    0.115    
+#---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+#(Dispersion parameter for binomial family taken to be 1)
+
+#Null deviance: 705.87  on 711  degrees of freedom
+#Residual deviance: 703.24  on 710  degrees of freedom
+#AIC: 707.24
+
+#Number of Fisher Scoring iterations: 4
+
+#Calculating the 95% Confidence interval and the Odds Ratio
+exp(cbind(OR = coef(BS.NEFA.0.7_MS.Milk.Yield), confint(BS.NEFA.0.7_MS.Milk.Yield)))
+
+#                     OR     2.5 %     97.5 %
+#(Intercept)   0.3615914 0.2177951 0.6059317
+#MS.Milk.Yield 0.9736720 0.9407232 1.0054229
+
+```
+- We find that, at a significance level of 0.05, this association is: Not Statistically Significant
+- The 95% Confidence Interval estimates that the true OR is between: 0.9407 & 1.0054
+- The Odds Ratio is: 0.9737
+
+<img src="https://user-images.githubusercontent.com/52465712/61130229-81313680-a4b6-11e9-856f-8000c24a1e85.png" width="300">
+  
+  
+  
+  #### BS.NEFA.0.7 ~ MS.NEFA - Testing how the cow's NEFA levels in her milk affects the cow's NEFA levels with a cutoff value
+  ```r
+#Logistic regression test
+BS.NEFA.0.7_MS.NEFA <- glm(BS.NEFA.0.7 ~ MS.NEFA, data = hp2, family = binomial(link=logit))
+summary(BS.NEFA.0.7_MS.NEFA)
+
+#Coefficients:
+#Estimate Std. Error z value Pr(>|z|)    
+#(Intercept) -1.84421    0.22733  -8.113 4.96e-16 ***
+#  MS.NEFA      0.11604    0.03761   3.085  0.00203 ** 
+#  ---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+#(Dispersion parameter for binomial family taken to be 1)
+
+#Null deviance: 571.58  on 538  degrees of freedom
+#Residual deviance: 561.83  on 537  degrees of freedom
+#(173 observations deleted due to missingness)
+#AIC: 565.83
+
+#Number of Fisher Scoring iterations: 4
+
+#Calculating the 95% Confidence interval and the Odds Ratio
+exp(cbind(OR = coef(BS.NEFA.0.7_MS.NEFA), confint(BS.NEFA.0.7_MS.NEFA)))
+
+#                     OR     2.5 %     97.5 %
+#(Intercept) 0.1581499 0.09978576 0.243690
+#MS.NEFA     1.1230428 1.04389616 1.210038
+
+```
+- We find that, at a significance level of 0.05, this association is: Statistically Significant
+- The 95% Confidence Interval estimates that the true OR is between: 1.0439 & 1.2100
+- The Odds Ratio is: 1.1230
+
+<img src="https://user-images.githubusercontent.com/52465712/61130229-81313680-a4b6-11e9-856f-8000c24a1e85.png" width="300">
+  
+  
+  
+  #### BS.NEFA.0.7 ~ MS.BHBA.Log - Testing how the cow's BHBA levels in milk affects the cow's NEFA levels with a cutoff value
+  ```r
+#Logistic regression test
+BS.NEFA.0.7_MS.BHBA.Log <- glm(BS.NEFA.0.7 ~ MS.BHBA.Log, data = hp2, family = binomial(link=logit))
+summary(BS.NEFA.0.7_MS.BHBA.Log)
+
+#Coefficients:
+#Estimate Std. Error z value Pr(>|z|)    
+#(Intercept)  -7.1028     0.7735  -9.183  < 2e-16 ***
+#  MS.BHBA.Log   1.3797     0.1741   7.923 2.32e-15 ***
+#  ---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+#(Dispersion parameter for binomial family taken to be 1)
+
+#Null deviance: 645.74  on 601  degrees of freedom
+#Residual deviance: 563.99  on 600  degrees of freedom
+#(110 observations deleted due to missingness)
+#AIC: 567.99
+
+#Number of Fisher Scoring iterations: 5
+
+#Calculating the 95% Confidence interval and the Odds Ratio
+exp(cbind(OR = coef(BS.NEFA.0.7_MS.BHBA.Log), confint(BS.NEFA.0.7_MS.BHBA.Log)))
+
+#                     OR     2.5 %     97.5 %
+#(Intercept) 0.0008228055 0.0001696345 0.003535706
+#MS.BHBA.Log 3.9735278634 2.8569759193 5.660908475
+
+```
+- We find that, at a significance level of 0.05, this association is: Statistically Significant
+- The 95% Confidence Interval estimates that the true OR is between: 2.8570 & 5.6609
+- The Odds Ratio is: 3.9735
+
+<img src="https://user-images.githubusercontent.com/52465712/61130229-81313680-a4b6-11e9-856f-8000c24a1e85.png" width="300">
+  
+  
+  
+  #### BS.NEFA.0.7 ~ MS.DIM - Testing how the cow's DIM affects the cow's NEFA levels with a cutoff value
+  ```r
+#Logistic regression test
+BS.NEFA.0.7_MS.DIM <- glm(BS.NEFA.0.7 ~ MS.DIM, data = hp2, family = binomial(link=logit))
+summary(BS.NEFA.0.7_MS.DIM)
+
+#Coefficients:
+#Estimate Std. Error z value Pr(>|z|)    
+#(Intercept) -0.37396    0.28974  -1.291  0.19681    
+#MS.DIM      -0.05647    0.01550  -3.642  0.00027 ***
+#  ---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+#(Dispersion parameter for binomial family taken to be 1)
+
+#Null deviance: 705.87  on 711  degrees of freedom
+#Residual deviance: 692.18  on 710  degrees of freedom
+#AIC: 696.18
+
+#Number of Fisher Scoring iterations: 4
+
+#Calculating the 95% Confidence interval and the Odds Ratio
+exp(cbind(OR = coef(BS.NEFA.0.7_MS.DIM), confint(BS.NEFA.0.7_MS.DIM)))
+
+#                     OR     2.5 %     97.5 %
+#(Intercept) 0.6880074 0.3881544 1.2106032
+#MS.DIM      0.9450991 0.9164581 0.9739724
+
+```
+- We find that, at a significance level of 0.05, this association is: Statistically Significant
+- The 95% Confidence Interval estimates that the true OR is between: 0.9165 & 0.9740
+- The Odds Ratio is: 0.9451
+
+<img src="https://user-images.githubusercontent.com/52465712/61130229-81313680-a4b6-11e9-856f-8000c24a1e85.png" width="300">
+  
+  
+  
+  #### BS.NEFA.0.7 ~ MS.Fat - Testing how the cow's fat levels affects the cow's NEFA levels with a cutoff value
+  ```r
+#Logistic regression test
+BS.NEFA.0.7_MS.Fat <- glm(BS.NEFA.0.7 ~ MS.Fat, data = hp2, family = binomial(link=logit))
+summary(BS.NEFA.0.7_MS.Fat)
+
+#Coefficients:
+#Estimate Std. Error z value Pr(>|z|)    
+#(Intercept) -4.01960    0.43408  -9.260  < 2e-16 ***
+#  MS.Fat       0.55946    0.08804   6.355 2.09e-10 ***
+#  ---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+#(Dispersion parameter for binomial family taken to be 1)
+
+#Null deviance: 705.87  on 711  degrees of freedom
+#Residual deviance: 661.74  on 710  degrees of freedom
+#AIC: 665.74
+
+#Number of Fisher Scoring iterations: 4
+
+#Calculating the 95% Confidence interval and the Odds Ratio
+exp(cbind(OR = coef(BS.NEFA.0.7_MS.Fat), confint(BS.NEFA.0.7_MS.Fat)))
+
+#                     OR     2.5 %     97.5 %
+#(Intercept) 0.01796011 0.0074756 0.04113887
+#MS.Fat      1.74972304 1.4776429 2.08861283
+
+```
+- We find that, at a significance level of 0.05, this association is: Statistically Significant
+- The 95% Confidence Interval estimates that the true OR is between: 1.4776 & 2.0886
+- The Odds Ratio is: 1.7497
+
+<img src="https://user-images.githubusercontent.com/52465712/61130229-81313680-a4b6-11e9-856f-8000c24a1e85.png" width="300">
+  
+  
+  
+  #### BS.NEFA.0.7 ~ MS.Protein - Testing how the cow's protein levels affects the cow's NEFA levels with a cutoff value
+  ```r
+#Logistic regression test
+BS.NEFA.0.7_MS.Protein <- glm(BS.NEFA.0.7 ~ MS.Protein, data = hp2, family = binomial(link=logit))
+summary(BS.NEFA.0.7_MS.Protein)
+
+#Coefficients:
+#Estimate Std. Error z value Pr(>|z|)    
+#(Intercept)   4.1607     1.1034   3.771 0.000163 ***
+# MS.Protein   -1.7209     0.3443  -4.998 5.79e-07 ***
+#  ---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+#(Dispersion parameter for binomial family taken to be 1)
+
+#Null deviance: 705.87  on 711  degrees of freedom
+#Residual deviance: 678.44  on 710  degrees of freedom
+#AIC: 682.44
+
+#Number of Fisher Scoring iterations: 4
+
+#Calculating the 95% Confidence interval and the Odds Ratio
+exp(cbind(OR = coef(BS.NEFA.0.7_MS.Protein), confint(BS.NEFA.0.7_MS.Protein)))
+
+#                     OR     2.5 %     97.5 %
+#(Intercept) 64.1148552 7.58788795 576.5672426
+#MS.Protein   0.1789022 0.08986398   0.3470675
+
+```
+- We find that, at a significance level of 0.05, this association is: Statistically Significant
+- The 95% Confidence Interval estimates that the true OR is between: 0.0899 & 0.3471
+- The Odds Ratio is: 0.1789
+
+<img src="https://user-images.githubusercontent.com/52465712/61130229-81313680-a4b6-11e9-856f-8000c24a1e85.png" width="300">
+  
+  
+  
+  #### BS.NEFA.0.7 ~ MS.Lactose - Testing how the milk's lactose level affects the cow's NEFA levels with a cutoff value
+  ```r
+#Logistic regression test
+BS.NEFA.0.7_MS.Lactose <- glm(BS.NEFA.0.7 ~ MS.Lactose, data = hp2, family = binomial(link=logit))
+summary(BS.NEFA.0.7_MS.Lactose)
+
+#Coefficients:
+#Estimate Std. Error z value Pr(>|z|)
+#(Intercept)   1.7128     2.2373   0.766    0.444
+#MS.Lactose   -0.6473     0.4644  -1.394    0.163
+
+#(Dispersion parameter for binomial family taken to be 1)
+
+#Null deviance: 705.87  on 711  degrees of freedom
+#Residual deviance: 703.97  on 710  degrees of freedom
+#AIC: 707.97
+
+#Number of Fisher Scoring iterations: 4
+
+#Calculating the 95% Confidence interval and the Odds Ratio
+exp(cbind(OR = coef(BS.NEFA.0.7_MS.Lactose), confint(BS.NEFA.0.7_MS.Lactose)))
+
+#                     OR     2.5 %     97.5 %
+#(Intercept) 5.5445488 0.06233196 452.506626
+#MS.Lactose  0.5234596 0.20962842   1.326273
+
+```
+- We find that, at a significance level of 0.05, this association is: Not Statistically Significant
+- The 95% Confidence Interval estimates that the true OR is between: 0.2096 & 1.3263
+- The Odds Ratio is: 0.5235
+
+<img src="https://user-images.githubusercontent.com/52465712/61130229-81313680-a4b6-11e9-856f-8000c24a1e85.png" width="300">
+  
+  
+  
+  #### BS.NEFA.0.7 ~ MS.Acetone.Log - Testing how the milk's acetone levels affects the cow's NEFA levels with a cutoff value
+  ```r
+#Logistic regression test
+BS.NEFA.0.7_MS.Acetone.Log <- glm(BS.NEFA.0.7 ~ MS.Acetone.Log, data = hp2, family = binomial(link=logit))
+summary(BS.NEFA.0.7_MS.Acetone.Log)
+
+#Coefficients:
+#Estimate Std. Error z value Pr(>|z|)    
+#(Intercept)     -6.3079     0.7047  -8.951  < 2e-16 ***
+#  MS.Acetone.Log   1.1210     0.1446   7.751 9.15e-15 ***
+#  ---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+#(Dispersion parameter for binomial family taken to be 1)
+
+#Null deviance: 591.92  on 520  degrees of freedom
+#Residual deviance: 511.35  on 519  degrees of freedom
+#(191 observations deleted due to missingness)
+#AIC: 515.35
+
+#Number of Fisher Scoring iterations: 5
+
+#Calculating the 95% Confidence interval and the Odds Ratio
+exp(cbind(OR = coef(BS.NEFA.0.7_MS.Acetone.Log), confint(BS.NEFA.0.7_MS.Acetone.Log)))
+
+#                     OR     2.5 %     97.5 %
+#(Intercept)    0.001821786 0.00042993 0.006842758
+#MS.Acetone.Log 3.068043345 2.33562693 4.122013015
+
+```
+- We find that, at a significance level of 0.05, this association is: Statistically Significant
+- The 95% Confidence Interval estimates that the true OR is between: 2.3356 & 4.1220
+- The Odds Ratio is: 3.0680
+
+<img src="https://user-images.githubusercontent.com/52465712/61130229-81313680-a4b6-11e9-856f-8000c24a1e85.png" width="300">
+  
+  
+  
+  #### BS.NEFA.0.7 ~ MS.Urea - Testing how the milk's urea levels affects the cow's NEFA levels with a cutoff value
+  ```r
+#Logistic regression test
+BS.NEFA.0.7_MS.Urea <- glm(BS.NEFA.0.7 ~ MS.Urea, data = hp2, family = binomial(link=logit))
+summary(BS.NEFA.0.7_MS.Urea)
+
+#Coefficients:
+#Estimate Std. Error z value Pr(>|z|)    
+#(Intercept) -1.56717    0.31474  -4.979 6.38e-07 ***
+#  MS.Urea      0.00637    0.01192   0.534    0.593    
+#---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+#(Dispersion parameter for binomial family taken to be 1)
+
+#Null deviance: 705.87  on 711  degrees of freedom
+#Residual deviance: 705.59  on 710  degrees of freedom
+#AIC: 709.59
+
+#Number of Fisher Scoring iterations: 4
+
+#Calculating the 95% Confidence interval and the Odds Ratio
+exp(cbind(OR = coef(BS.NEFA.0.7_MS.Urea), confint(BS.NEFA.0.7_MS.Urea)))
+
+#                     OR     2.5 %     97.5 %
+#(Intercept) 0.208635 0.1125195 0.3874585
+#MS.Urea     1.006390 0.9826336 1.0298071
+
+```
+- We find that, at a significance level of 0.05, this association is: Not Statistically Significant
+- The 95% Confidence Interval estimates that the true OR is between: 0.9826 & 1.0298
+- The Odds Ratio is: 1.0064
+
+<img src="https://user-images.githubusercontent.com/52465712/61130229-81313680-a4b6-11e9-856f-8000c24a1e85.png" width="300">
+  
+  
+  
+  
+  #### BS.NEFA.0.7 ~ MS.S.Cell.Count.Log - Testing how the milk's SCC  levels affects the cow's NEFA levels with a cutoff value
+  ```r
+#Logistic regression test
+BS.NEFA.0.7_MS.S.Cell.Count.Log <- glm(BS.NEFA.0.7 ~ MS.S.Cell.Count.Log, data = hp2, family = binomial(link=logit))
+summary(BS.NEFA.0.7_MS.S.Cell.Count.Log)
+
+#Coefficients:
+#Estimate Std. Error z value Pr(>|z|)    
+#(Intercept)         -1.60665    0.31665  -5.074  3.9e-07 ***
+#  MS.S.Cell.Count.Log  0.04736    0.07147   0.663    0.508    
+#---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+#(Dispersion parameter for binomial family taken to be 1)
+
+#Null deviance: 705.87  on 711  degrees of freedom
+#Residual deviance: 705.43  on 710  degrees of freedom
+#AIC: 709.43
+
+#Number of Fisher Scoring iterations: 4
+
+#Calculating the 95% Confidence interval and the Odds Ratio
+exp(cbind(OR = coef(BS.NEFA.0.7_MS.S.Cell.Count.Log), confint(BS.NEFA.0.7_MS.S.Cell.Count.Log)))
+
+#                     OR     2.5 %     97.5 %
+#(Intercept)         0.2005576 0.1073794 0.3721972
+#MS.S.Cell.Count.Log 1.0484982 0.9096975 1.2044724
+
+```
+- We find that, at a significance level of 0.05, this association is: Not Statistically Significant
+- The 95% Confidence Interval estimates that the true OR is between: 0.9097 & 1.2045
+- The Odds Ratio is: 1.0485
+
+<img src="https://user-images.githubusercontent.com/52465712/61130229-81313680-a4b6-11e9-856f-8000c24a1e85.png" width="300">
+  
+  
+  
+  #### BS.NEFA.0.7 ~ MS.pH - Testing how the milk's pH levels affects the cow's NEFA levels with a cutoff value
+  ```r
+#Logistic regression test
+BS.NEFA.0.7_MS.pH <- glm(BS.NEFA.0.7 ~ MS.pH, data = hp2, family = binomial(link=logit))
+summary(BS.NEFA.0.7_MS.pH)
+
+#Coefficients:
+#Estimate Std. Error z value Pr(>|z|)  
+#(Intercept)   15.869      6.882   2.306   0.0211 *
+#  MS.pH         -2.606      1.039  -2.509   0.0121 *
+#  ---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+#(Dispersion parameter for binomial family taken to be 1)
+
+#Null deviance: 705.87  on 711  degrees of freedom
+#Residual deviance: 699.77  on 710  degrees of freedom
+#AIC: 703.77
+
+#Number of Fisher Scoring iterations: 4
+
+#Calculating the 95% Confidence interval and the Odds Ratio
+exp(cbind(OR = coef(BS.NEFA.0.7_MS.pH), confint(BS.NEFA.0.7_MS.pH)))
+
+#                     OR     2.5 %     97.5 %
+#(Intercept) 7.795210e+06 9.309740985 6.017084e+12
+#MS.pH       7.386165e-02 0.009539736 5.777644e-01
+
+```
+- We find that, at a significance level of 0.05, this association is: Statistically Significant
+- The 95% Confidence Interval estimates that the true OR is between: 0.0095 & 0.5778
+- The Odds Ratio is: 0.0095
+
+<img src="https://user-images.githubusercontent.com/52465712/61130229-81313680-a4b6-11e9-856f-8000c24a1e85.png" width="300">
+  
+  
+  
+  
+  #### BS.NEFA.0.7 ~ MS.SFA - Testing how the milk's saturated fatty acid levels affect the cow's NEFA levels with a cutoff value
+  ```r
+#Logistic regression test
+BS.NEFA.0.7_MS.SFA <- glm(BS.NEFA.0.7 ~ MS.SFA, data = hp2, family = binomial(link=logit))
+summary(BS.NEFA.0.7_MS.SFA)
+
+#Coefficients:
+#Estimate Std. Error z value Pr(>|z|)    
+#(Intercept)  -2.7704     0.5165  -5.364 8.14e-08 ***
+#  MS.SFA        0.6622     0.1850   3.580 0.000344 ***
+#  ---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+#(Dispersion parameter for binomial family taken to be 1)
+
+#Null deviance: 492.39  on 421  degrees of freedom
+#Residual deviance: 478.87  on 420  degrees of freedom
+#(290 observations deleted due to missingness)
+#AIC: 482.87
+
+#Number of Fisher Scoring iterations: 4
+
+#Calculating the 95% Confidence interval and the Odds Ratio
+exp(cbind(OR = coef(BS.NEFA.0.7_MS.SFA), confint(BS.NEFA.0.7_MS.SFA)))
+
+#                     OR     2.5 %     97.5 %
+#(Intercept) 0.06263751 0.02206818 0.1681001
+#MS.SFA      1.93909771 1.35824293 2.8117401
+
+```
+- We find that, at a significance level of 0.05, this association is: Statistically Significant
+- The 95% Confidence Interval estimates that the true OR is between: 1.3582 & 2.8117
+- The Odds Ratio is: 1.9391
+
+<img src="https://user-images.githubusercontent.com/52465712/61130229-81313680-a4b6-11e9-856f-8000c24a1e85.png" width="300">
+  
+  
+  
+  #### BS.NEFA.0.7 ~ MS.PFA - Testing how the milk's polyunsaturated fatty acid levels affect the cow's NEFA levels with a cutoff value
+  ```r
+#Logistic regression test
+BS.NEFA.0.7_MS.PFA <- glm(BS.NEFA.0.7 ~ MS.PFA, data = hp2, family = binomial(link=logit))
+summary(BS.NEFA.0.7_MS.PFA)
+
+#Coefficients:
+#Estimate Std. Error z value Pr(>|z|)    
+#(Intercept)  -4.6440     0.5273  -8.807  < 2e-16 ***
+#  MS.PFA       22.0430     3.0159   7.309 2.69e-13 ***
+#  ---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+#(Dispersion parameter for binomial family taken to be 1)
+
+#Null deviance: 492.39  on 421  degrees of freedom
+#Residual deviance: 423.24  on 420  degrees of freedom
+#(290 observations deleted due to missingness)
+#AIC: 427.24
+
+#Number of Fisher Scoring iterations: 4
+
+#Calculating the 95% Confidence interval and the Odds Ratio
+exp(cbind(OR = coef(BS.NEFA.0.7_MS.PFA), confint(BS.NEFA.0.7_MS.PFA)))
+
+#                     OR     2.5 %     97.5 %
+#(Intercept) 9.619258e-03 3.269512e-03 2.593933e-02
+#MS.PFA      3.742525e+09 1.264863e+07 1.768876e+12
+
+```
+- We find that, at a significance level of 0.05, this association is: Statistically Significant
+- The 95% Confidence Interval estimates that the true OR is between: 1.264863e7 & 1.768876e12
+- The Odds Ratio is: 3.742525e9
+
+<img src="https://user-images.githubusercontent.com/52465712/61130229-81313680-a4b6-11e9-856f-8000c24a1e85.png" width="300">
+  
+  
+  
+  #### BS.NEFA.0.7 ~ MS.MFA - Testing how the milk's monosaturated fatty acid levels affect the cow's NEFA levels with a cutoff value
+  ```r
+#Logistic regression test
+BS.NEFA.0.7_MS.MFA <- glm(BS.NEFA.0.7 ~ MS.MFA, data = hp2, family = binomial(link=logit))
+summary(BS.NEFA.0.7_MS.MFA)
+
+#Coefficients:
+#Estimate Std. Error z value Pr(>|z|)    
+#(Intercept)  -4.3571     0.4355  -10.01   <2e-16 ***
+#  MS.MFA        2.3060     0.2792    8.26   <2e-16 ***
+#  ---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+#(Dispersion parameter for binomial family taken to be 1)
+
+#Null deviance: 492.39  on 421  degrees of freedom
+#Residual deviance: 395.55  on 420  degrees of freedom
+#(290 observations deleted due to missingness)
+#AIC: 399.55
+
+#Number of Fisher Scoring iterations: 4
+
+#Calculating the 95% Confidence interval and the Odds Ratio
+exp(cbind(OR = coef(BS.NEFA.0.7_MS.MFA), confint(BS.NEFA.0.7_MS.MFA)))
+
+#                     OR     2.5 %     97.5 %
+#(Intercept)  0.01281584 0.005242309  0.02900488
+#MS.MFA      10.03419566 5.942846457 17.79263277
+
+```
+- We find that, at a significance level of 0.05, this association is: Statistically Significant
+- The 95% Confidence Interval estimates that the true OR is between: 5.9428 & 17.7926
+- The Odds Ratio is: 10.0342
+
+<img src="https://user-images.githubusercontent.com/52465712/61130229-81313680-a4b6-11e9-856f-8000c24a1e85.png" width="300">
+  
+  
+  
+  
+  #### BS.NEFA.0.7 ~ MS.NSFA - Testing how the milk's non-saturated fatty acid levels affect the cow's NEFA levels with a cutoff value
+  ```r
+#Logistic regression test
+BS.NEFA.0.7_MS.NSFA <- glm(BS.NEFA.0.7 ~ MS.NSFA, data = hp2, family = binomial(link=logit))
+summary(BS.NEFA.0.7_MS.NSFA)
+
+#Coefficients:
+#Estimate Std. Error z value Pr(>|z|)    
+#(Intercept) -4.54781    0.35891 -12.671   <2e-16 ***
+#  MS.NSFA      0.17664    0.01841   9.596   <2e-16 ***
+#  ---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+#(Dispersion parameter for binomial family taken to be 1)
+
+#Null deviance: 705.87  on 711  degrees of freedom
+#Residual deviance: 589.35  on 710  degrees of freedom
+#AIC: 593.35
+
+#Number of Fisher Scoring iterations: 5
+
+#Calculating the 95% Confidence interval and the Odds Ratio
+exp(cbind(OR = coef(BS.NEFA.0.7_MS.NSFA), confint(BS.NEFA.0.7_MS.NSFA)))
+
+#                     OR     2.5 %     97.5 %
+#(Intercept) 0.01059033 0.005106129 0.02089631
+#MS.NSFA     1.19319713 1.152166560 1.23852422
+
+```
+- We find that, at a significance level of 0.05, this association is: Statistically Significant
+- The 95% Confidence Interval estimates that the true OR is between: 1.1522 & 1.2385
+- The Odds Ratio is: 1.1932
+
+<img src="https://user-images.githubusercontent.com/52465712/61130229-81313680-a4b6-11e9-856f-8000c24a1e85.png" width="300">
+  
+  
+  
+  #### BS.NEFA.0.7 ~ MS.Palmeic - Testing how the milk's palmeic fatty acid levels affect the cow's NEFA levels with a cutoff value
+  ```r
+#Logistic regression test
+BS.NEFA.0.7_MS.Palmeic <- glm(BS.NEFA.0.7 ~ MS.Palmeic, data = hp2, family = binomial(link=logit))
+summary(BS.NEFA.0.7_MS.Palmeic)
+
+#Coefficients:
+#Estimate Std. Error z value Pr(>|z|)
+#(Intercept)  -0.8471     0.5284  -1.603    0.109
+#MS.Palmeic   -0.1317     0.4646  -0.284    0.777
+
+#(Dispersion parameter for binomial family taken to be 1)
+
+#Null deviance: 492.39  on 421  degrees of freedom
+#Residual deviance: 492.31  on 420  degrees of freedom
+#(290 observations deleted due to missingness)
+#AIC: 496.31
+
+#Number of Fisher Scoring iterations: 4
+
+#Calculating the 95% Confidence interval and the Odds Ratio
+exp(cbind(OR = coef(BS.NEFA.0.7_MS.Palmeic), confint(BS.NEFA.0.7_MS.Palmeic)))
+
+#                     OR     2.5 %     97.5 %
+#(Intercept) 0.4286491 0.1531661 1.223459
+#MS.Palmeic  0.8765684 0.3447363 2.145834
+
+```
+- We find that, at a significance level of 0.05, this association is: Not Statistically Significant
+- The 95% Confidence Interval estimates that the true OR is between: 0.3447 & 2.1458
+- The Odds Ratio is: 0.8766
+
+<img src="https://user-images.githubusercontent.com/52465712/61130229-81313680-a4b6-11e9-856f-8000c24a1e85.png" width="300">
+  
+  
+  
+  #### BS.NEFA.0.7 ~ MS.Stearine - Testing how the milk's stearic fatty acid levels affect the cow's NEFA levels with a cutoff value
+  ```r
+#Logistic regression test
+BS.NEFA.0.7_MS.Stearine <- glm(BS.NEFA.0.7 ~ MS.Stearine, data = hp2, family = binomial(link=logit))
+summary(BS.NEFA.0.7_MS.Stearine)
+
+#Coefficients:
+#Estimate Std. Error z value Pr(>|z|)    
+#(Intercept)  -4.7204     0.4901  -9.631  < 2e-16 ***
+#  MS.Stearine   6.7658     0.8346   8.107 5.19e-16 ***
+#  ---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+#(Dispersion parameter for binomial family taken to be 1)
+
+#Null deviance: 492.39  on 421  degrees of freedom
+#Residual deviance: 403.98  on 420  degrees of freedom
+#(290 observations deleted due to missingness)
+#AIC: 407.98
+
+#Number of Fisher Scoring iterations: 4
+
+#Calculating the 95% Confidence interval and the Odds Ratio
+exp(cbind(OR = coef(BS.NEFA.0.7_MS.Stearine), confint(BS.NEFA.0.7_MS.Stearine)))
+
+#                     OR     2.5 %     97.5 %
+#(Intercept) 8.911739e-03   0.00326305 2.238222e-02
+#MS.Stearine 8.676627e+02 180.10682048 4.781708e+03
+
+```
+- We find that, at a significance level of 0.05, this association is: Statistically Significant
+- The 95% Confidence Interval estimates that the true OR is between: 180.1068 & 4,781.708
+- The Odds Ratio is: 867.6627
+
+<img src="https://user-images.githubusercontent.com/52465712/61130229-81313680-a4b6-11e9-856f-8000c24a1e85.png" width="300">
+  
+  
+  
+  #### BS.NEFA.0.7 ~ MS.Oleic - Testing how the milk's oleic fatty acid levels affect the cow's NEFA levels with a cutoff value
+  ```r
+#Logistic regression test
+BS.NEFA.0.7_MS.Oleic <- glm(BS.NEFA.0.7 ~ MS.Oleic, data = hp2, family = binomial(link=logit))
+summary(BS.NEFA.0.7_MS.Oleic)
+
+#Coefficients:
+#Estimate Std. Error z value Pr(>|z|)    
+#(Intercept)  -4.1732     0.4123 -10.121   <2e-16 ***
+#  MS.Oleic      2.3350     0.2806   8.321   <2e-16 ***
+#  ---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+#(Dispersion parameter for binomial family taken to be 1)
+
+#Null deviance: 492.39  on 421  degrees of freedom
+#Residual deviance: 393.17  on 420  degrees of freedom
+#(290 observations deleted due to missingness)
+#AIC: 397.17
+
+#Number of Fisher Scoring iterations: 4
+
+#Calculating the 95% Confidence interval and the Odds Ratio
+exp(cbind(OR = coef(BS.NEFA.0.7_MS.Oleic), confint(BS.NEFA.0.7_MS.Oleic)))
+
+#                     OR     2.5 %     97.5 %
+#(Intercept)  0.01540308 0.00660423  0.03336427
+#MS.Oleic    10.32964624 6.10268125 18.37532923
+
+```
+- We find that, at a significance level of 0.05, this association is: Statistically Significant
+- The 95% Confidence Interval estimates that the true OR is between: 6.1027 & 18.3753
+- The Odds Ratio is: 10.3296
+
+<img src="https://user-images.githubusercontent.com/52465712/61130229-81313680-a4b6-11e9-856f-8000c24a1e85.png" width="300">
+  
+  
+  
+  #### BS.NEFA.0.7 ~ CE.Fat.Level - Testing how the cow's fat level affects the cow's NEFA levels with a cutoff value
+  ```r
+#Logistic regression test
+BS.NEFA.0.7_CE.Fat.Level <- glm(BS.NEFA.0.7 ~ CE.Fat.Level, data = hp2, family = binomial(link=logit))
+summary(BS.NEFA.0.7_CE.Fat.Level)
+
+#Coefficients:
+#Estimate Std. Error z value Pr(>|z|)    
+#(Intercept)  -3.14461    0.28221 -11.143  < 2e-16 ***
+#  CE.Fat.Level  0.09858    0.01399   7.044 1.86e-12 ***
+#  ---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+#(Dispersion parameter for binomial family taken to be 1)
+
+#Null deviance: 695.56  on 694  degrees of freedom
+#Residual deviance: 641.41  on 693  degrees of freedom
+#(17 observations deleted due to missingness)
+#AIC: 645.41
+
+#Number of Fisher Scoring iterations: 4
+
+#Calculating the 95% Confidence interval and the Odds Ratio
+exp(cbind(OR = coef(BS.NEFA.0.7_CE.Fat.Level), confint(BS.NEFA.0.7_CE.Fat.Level)))
+
+#                     OR     2.5 %     97.5 %
+#(Intercept)  0.04308376 0.02436153 0.07376645
+#CE.Fat.Level 1.10360408 1.07426933 1.13496243
+
+```
+- We find that, at a significance level of 0.05, this association is: Statistically Significant
+- The 95% Confidence Interval estimates that the true OR is between: 1.0743 & 1.1350
+- The Odds Ratio is: 1.1036
+
+<img src="https://user-images.githubusercontent.com/52465712/61130229-81313680-a4b6-11e9-856f-8000c24a1e85.png" width="300">
+  
+  
+  
+  #### BS.NEFA.0.7 ~ CE.Temp - Testing how the cow's temperature affects the cow's NEFA levels with a cutoff value
+  ```r
+#Logistic regression test
+BS.NEFA.0.7_CE.Temp <- glm(BS.NEFA.0.7 ~ CE.Temp, data = hp2, family = binomial(link=logit))
+summary(BS.NEFA.0.7_CE.Temp)
+
+#Coefficients:
+#Estimate Std. Error z value Pr(>|z|)  
+#(Intercept) -2.98432    1.74612  -1.709   0.0874 .
+#CE.Temp      0.04100    0.04513   0.909   0.3636  
+#---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+#(Dispersion parameter for binomial family taken to be 1)
+
+#Null deviance: 694.10  on 697  degrees of freedom
+#Residual deviance: 693.28  on 696  degrees of freedom
+#(14 observations deleted due to missingness)
+#AIC: 697.28
+
+#Number of Fisher Scoring iterations: 4
+
+#Calculating the 95% Confidence interval and the Odds Ratio
+exp(cbind(OR = coef(BS.NEFA.0.7_CE.Temp), confint(BS.NEFA.0.7_CE.Temp)))
+
+#                     OR     2.5 %     97.5 %
+#(Intercept) 0.05057411 0.000354967 2.592792
+#CE.Temp     1.04185223 0.940866637 1.184720
+
+```
+- We find that, at a significance level of 0.05, this association is: Not Statistically Significant
+- The 95% Confidence Interval estimates that the true OR is between: 0.9409 & 1.1847
+- The Odds Ratio is: 1.0419
+
+<img src="https://user-images.githubusercontent.com/52465712/61130229-81313680-a4b6-11e9-856f-8000c24a1e85.png" width="300">
+  
+  
+  
+  #### BS.NEFA.0.7 ~ CE.Environ.Temp - Testing how the environmental temperature affects the cow's NEFA levels with a cutoff value
+  ```r
+#Logistic regression test
+BS.NEFA.0.7_CE.Environ.Temp <- glm(BS.NEFA.0.7 ~ CE.Environ.Temp, data = hp2, family = binomial(link=logit))
+summary(BS.NEFA.0.7_CE.Environ.Temp)
+
+#Coefficients:
+#Estimate Std. Error z value Pr(>|z|)    
+#(Intercept)     -1.89556    0.28514  -6.648 2.98e-11 ***
+#  CE.Environ.Temp  0.02801    0.01547   1.811   0.0702 .  
+#---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+#(Dispersion parameter for binomial family taken to be 1)
+
+#Null deviance: 663.44  on 672  degrees of freedom
+#Residual deviance: 660.13  on 671  degrees of freedom
+#(39 observations deleted due to missingness)
+#AIC: 664.13
+
+#Number of Fisher Scoring iterations: 4
+
+#Calculating the 95% Confidence interval and the Odds Ratio
+exp(cbind(OR = coef(BS.NEFA.0.7_CE.Environ.Temp), confint(BS.NEFA.0.7_CE.Environ.Temp)))
+
+#                     OR     2.5 %     97.5 %
+#(Intercept)     0.1502335 0.08465657 0.2593317
+#CE.Environ.Temp 1.0284109 0.99785541 1.0603468
+
+```
+- We find that, at a significance level of 0.05, this association is: Not Statistically Significant
+- The 95% Confidence Interval estimates that the true OR is between: 0.9979 & 1.0603
+- The Odds Ratio is: 1.0284
+
+<img src="https://user-images.githubusercontent.com/52465712/61130229-81313680-a4b6-11e9-856f-8000c24a1e85.png" width="300">
+  
+ 
 
 
 --------
