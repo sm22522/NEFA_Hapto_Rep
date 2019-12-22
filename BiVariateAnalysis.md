@@ -2488,12 +2488,14 @@ Proportion Bar Graph:
 #### Statistically Significant Variables
 Numerical Variables:
 - BS.BHBA, MS.DIM, MS.Fat, MS.Protein, MS.pH, MS.NSFA, MS.Acetone.Log, MS.BHBA, MS.MFA, MS.PFA, MS.SFA, MS.Stearine, MS.Oleic, MS.NEFA, CE.Environ.Temp, CE.Fat.Level, BS.DIM, BS.MS.Date.Difference, Hapto.Log
+
 Factor Variables:
 - Cow.Breed, CE.Stom.Layering, CE.Waste.Consistency, CE.Locomotion Score, CE.Stom.Noise.Freq, CE.Lame, BS.Month_warm, CE.Stom.Fullness, BS.BHBA.1.2, 
 
 #### Statistically Insignificant Variables
 Numerical Variables:
 - Calving.No, Milk.Yield, MS.Milk.Yield, MS.Lactose, MS.Urea, MS.S.Cell.Count.Log, MS.Palmeic, CE.Temp
+
 Factor Variables:
 - Hfr.or.Cow, CE.Skin.Dehydration, CE.Stom.Tension, CE.Stom.Fluid.Movement, CE.Stom.Ping, CE.Waste.Digestion
 
